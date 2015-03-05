@@ -91,6 +91,54 @@ public class RADIUS {
     }
     
     /**
+     * RADIUS RFC 2865 defines some Attributes:
+     * User-Name, User-Password, CHAP-Password, NAS-IP-Address, NAS-Port,
+     * Service-Type, Framed-Protocol, Framed-IP-Address, Framed-IP-Netmask,
+     * Framed-Routing, Filter-Id, Framed-MTU, Framed-Compression, Login-IP-Host,
+     * Login-Service, Login-TCP-Port, (unassigned) Reply-Message,
+     * Callback-Number, Callback-Id, (unassigned), Framed-Route,
+     * Framed-IPX-Network, State, Class, Vendor-Specific, Session-Timeout
+     * Idle-Timeout, Termination-Action, Called-Station-Id,
+     * Calling-Station-Id, NAS-Identifier, Proxy-State, Login-LAT-Service,
+     * Login-LAT-Node, Login-LAT-Group, Framed-AppleTalk-Link,
+     * Framed-AppleTalk-Network, Framed-AppleTalk-Zone,
+     * (reserved for accounting), CHAP-Challenge, NAS-Port-Type, Port-Limit,
+     * Login-LAT-Port
+     */
+    public enum  Attribute{
+        
+        USER_NAME(1),
+        LOGIN_LAT_PORT(63);
+        
+        /* The code value. */
+	public final int value;
+        
+        /**
+         * Instantiates a new code with the specified code value.
+         * 
+         * @param value the integer value of the code
+         */
+        Attribute(int value){
+            this.value = value;
+        }
+        
+        /**
+        * Converts the specified integer value to a request code.
+        *
+        * @param value the integer value
+        * @return the request code
+        * @throws IllegalArgumentException if the integer value is unrecognized
+        */
+        public static Attribute valueOf(int value) {
+            switch (value) {
+                   case 1:     return USER_NAME;
+                   case 2:     return LOGIN_LAT_PORT;
+                   default: throw new IllegalArgumentException("Unknwon RADIUS request code "+value); 
+            }
+        }        
+    }
+    
+    /**
      * RADIUS message format.
      * 
      * 0                   1                   2                   3
