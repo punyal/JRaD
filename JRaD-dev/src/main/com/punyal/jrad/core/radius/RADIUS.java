@@ -36,24 +36,15 @@ public class RADIUS {
      */
     public enum Code {
         
-        /** Access-Request */
-        ACCESS_REQUEST(1),
-        /** Access-Accept */
-        ACCESS_ACCEPT(2),
-        /** Access-Reject */
-        ACCESS_REJECT(3),
-        /** Accounting-Request */
-        ACCOUNTING_REQUEST(4),
-        /** Accounting-Response */
-        ACCOUNTING_RESPONSE(5),
-        /** Access_Challenge */
-        ACCESS_CHALLENGE(11),
-        /** Status-Server (Experimental) */
-        STATUS_SERVER(12),
-        /** Status-Client (Experimental) */
-        STATUS_CLIENT(13),
-        /** Accounting-Response */
-        RESERVED(255);
+        ACCESS_REQUEST          (1),
+        ACCESS_ACCEPT           (2),
+        ACCESS_REJECT           (3),
+        ACCOUNTING_REQUEST      (4),
+        ACCOUNTING_RESPONSE     (5),
+        ACCESS_CHALLENGE       (11),
+        STATUS_SERVER          (12),  /** (Experimental) */
+        STATUS_CLIENT          (13),  /** (Experimental) */
+        RESERVED              (255);
         
         /* The code value. */
 	public final int value;
@@ -85,7 +76,7 @@ public class RADIUS {
                    case 12:    return STATUS_SERVER;
                    case 13:    return STATUS_CLIENT;
                    case 255:   return RESERVED;
-                   default: throw new IllegalArgumentException("Unknwon RADIUS request code "+value); 
+                   default: throw new IllegalArgumentException("Unknown RADIUS code "+value); 
             }
         }        
     }
@@ -107,8 +98,47 @@ public class RADIUS {
      */
     public enum  Attribute{
         
-        USER_NAME(1),
-        LOGIN_LAT_PORT(63);
+        USER_NAME                   (1),
+        USER_PASSWORD               (2),
+        CHAP_PASSWORD               (3),
+        NAS_IP_ADDRESS              (4),
+        NAS_PORT                    (5),
+        SERVICE_TYPE                (6),
+        FRAMED_PROTOCOL             (7),
+        FRAMED_IP_ADDRESS           (8),
+        FRAMED_IP_NETMASK           (9),
+        FRAMED_ROUTING             (10),
+        FILTER_ID                  (11),
+        FRAMED_MTU                 (12),
+        FRAMED_COMPRESSION         (13),
+        LOGIN_IP_HOST              (14),
+        LOGIN_SERVICE              (15),
+        LOGIN_TCP_PORT             (16),
+        REPLY_MESSAGE              (18),
+        CALLBACK_NUMBER            (19),
+        CALLBACK_ID                (20),
+        FRAMED_ROUTE               (22),
+        FRAMED_IPX_NETWORK         (23),
+        STATE                      (24),
+        CLASS                      (25),
+        VENDOR_SPECIFIC            (26),
+        SESSION_TIMEOUT            (27),
+        IDLE_TIMEOUT               (28),
+        TERMINATION_ACTION         (29),
+        CALLED_STATION_ID          (30),
+        CALLING_STATION_ID         (31),
+        NAS_IDENTIFIER             (32),
+        PROXY_STATE                (33),
+        LOGIN_LAT_SERVICE          (34),
+        LOGIN_LAT_NODE             (35),
+        LOGIN_LAT_GROUP            (36),
+        FRAMED_APPLETALK_LINK      (37),
+        FRAMED_APPLETALK_NETWORK   (38),
+        FRAMED_APPLETALK_ZONE      (39),
+        CHAP_CHALLENGE             (60),
+        NAS_PORT_TYPE              (61),
+        PORT_LIMIT                 (62),
+        LOGIN_LAT_PORT             (63);
         
         /* The code value. */
 	public final int value;
@@ -131,9 +161,49 @@ public class RADIUS {
         */
         public static Attribute valueOf(int value) {
             switch (value) {
-                   case 1:     return USER_NAME;
-                   case 2:     return LOGIN_LAT_PORT;
-                   default: throw new IllegalArgumentException("Unknwon RADIUS request code "+value); 
+                   case  1:     return USER_NAME;
+                   case  2:     return USER_PASSWORD;
+                   case  3:     return CHAP_PASSWORD;
+                   case  4:     return NAS_IP_ADDRESS;
+                   case  5:     return NAS_PORT;
+                   case  6:     return SERVICE_TYPE;
+                   case  7:     return FRAMED_PROTOCOL;
+                   case  8:     return FRAMED_IP_ADDRESS;
+                   case  9:     return FRAMED_IP_NETMASK;
+                   case 10:     return FRAMED_ROUTING;
+                   case 11:     return FILTER_ID;
+                   case 12:     return FRAMED_MTU;
+                   case 13:     return FRAMED_COMPRESSION;
+                   case 14:     return LOGIN_IP_HOST;
+                   case 15:     return LOGIN_SERVICE;
+                   case 16:     return LOGIN_TCP_PORT;
+                   case 18:     return REPLY_MESSAGE;
+                   case 19:     return CALLBACK_NUMBER;
+                   case 20:     return CALLBACK_ID;
+                       
+                   case 22:     return FRAMED_ROUTE;
+                   case 23:     return FRAMED_IPX_NETWORK;
+                   case 24:     return STATE;
+                   case 25:     return CLASS;
+                   case 26:     return VENDOR_SPECIFIC;
+                   case 27:     return SESSION_TIMEOUT;
+                   case 28:     return IDLE_TIMEOUT;
+                   case 29:     return TERMINATION_ACTION;
+                   case 30:     return CALLED_STATION_ID;
+                   case 31:     return CALLING_STATION_ID;
+                   case 32:     return NAS_IDENTIFIER;
+                   case 33:     return PROXY_STATE;
+                   case 34:     return LOGIN_LAT_SERVICE;
+                   case 35:     return LOGIN_LAT_NODE;
+                   case 36:     return LOGIN_LAT_GROUP;
+                   case 37:     return FRAMED_APPLETALK_LINK;
+                   case 38:     return FRAMED_APPLETALK_NETWORK;
+                   case 39:     return FRAMED_APPLETALK_ZONE;
+                   case 60:     return CHAP_CHALLENGE;
+                   case 61:     return NAS_PORT_TYPE;
+                   case 62:     return PORT_LIMIT;
+                   case 63:     return LOGIN_LAT_PORT;
+                   default: throw new IllegalArgumentException("Unknown RADIUS 2865 Attribute "+value); 
             }
         }        
     }
@@ -181,6 +251,9 @@ public class RADIUS {
         
         /** number of bits used for the encoding of the Attribute Length */
         public static final int ATTRIBUTE_LENGTH_BITS = 8;
+		
+	/** The code value of an empty message. */
+	public static final int EMPTY_CODE = 0;
     }
     
 }
