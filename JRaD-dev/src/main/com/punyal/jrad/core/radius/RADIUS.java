@@ -54,7 +54,7 @@ public class RADIUS {
          * 
          * @param value the integer value of the code
          */
-        Code(int value){
+        Code(int value) {
             this.value = value;
         }
         
@@ -96,7 +96,7 @@ public class RADIUS {
      * (reserved for accounting), CHAP-Challenge, NAS-Port-Type, Port-Limit,
      * Login-LAT-Port
      */
-    public enum  Attribute{
+    public enum  Attribute {
         
         USER_NAME                   (1),
         USER_PASSWORD               (2),
@@ -148,7 +148,7 @@ public class RADIUS {
          * 
          * @param value the integer value of the code
          */
-        Attribute(int value){
+        Attribute(int value) {
             this.value = value;
         }
         
