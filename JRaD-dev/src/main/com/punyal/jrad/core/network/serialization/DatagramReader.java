@@ -55,8 +55,8 @@ public class DatagramReader {
      * @param numBits the number of bits to read
      * @return a int containing the bits read
      */
-    public long read(int numBits) {
-        long bits = 0; // all bits to zero
+    public int read(int numBits) {
+        int bits = 0; // all bits to zero
         for(int i = numBits -1; i >= 0; i--){
             // checks whether new byte needs to be read
             if(currentBitIndex < 0)

@@ -6,13 +6,16 @@
 
 package com.punyal.jrad.core.network.serialization;
 
-import com.punyal.jrad.core.radius.RADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.Code.ACCESS_ACCEPT;
 import static com.punyal.jrad.core.radius.RADIUS.Code.ACCOUNTING_REQUEST;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.CODE_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.EMPTY_CODE;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.IDENTIFIER_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.LENGTH_BITS;
+
+import com.punyal.jrad.core.radius.EmptyMessage;
+import com.punyal.jrad.core.radius.Message;
+import com.punyal.jrad.core.radius.RADIUS;
 import com.punyal.jrad.core.radius.Request;
 
 public class DataParser {
@@ -63,6 +66,21 @@ public class DataParser {
         Request request = new Request(RADIUS.Code.valueOf(code));
         parseMessage(request);
         return request;
-                
+    }
+    
+    public EmptyMessage parseEmptyMessage() {
+        assert(!isRequest() && !isResponse());
+        EmptyMessage message = new EmptyMessage();
+        parseMessage(message);
+        return message;
+    }
+    
+    private void parseMessage(Message message){
+        message.setCode(RADIUS.Code.valueOf(code));
+        message.setMID(mid);
+        message.setLength(length);
+        
+        message.setAuthenticator(reader.readBytesLeft());
+        // TODO: ADD attributes and modify authenticator
     }
 }

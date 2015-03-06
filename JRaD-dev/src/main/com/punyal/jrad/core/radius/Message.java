@@ -7,7 +7,6 @@
 package com.punyal.jrad.core.radius;
 
 import java.net.InetAddress;
-import java.util.logging.Logger;
 
 
 /**
@@ -19,7 +18,9 @@ public abstract class Message {
     public static final int NONE = -1;
     
     /** The Constant EMPTY in case no length has been set */
-    public static final int EMPTY = 0;
+    public static final int MINIMAL = ( RADIUS.MessageFormat.CODE_BITS +
+            RADIUS.MessageFormat.IDENTIFIER_BITS + RADIUS.MessageFormat.LENGTH_BITS +
+            RADIUS.MessageFormat.AUTHENTICATOR_BITS ) / 8;
     
     /** The Code. On of {Access-Request, Access-Accept, Access-Reject, Accounting-Request
      * ,Accounting-Response, Access-Challenge, Status-Server, Status-Client, Reserved}  */
@@ -29,7 +30,7 @@ public abstract class Message {
     private int mid = NONE;
     
     /** The 16-bit Message Length */
-    private int length = EMPTY;
+    private int length = MINIMAL;
     
     /** The 128-bit Authenticator (16 octets) */
     private byte[] authenticator;
