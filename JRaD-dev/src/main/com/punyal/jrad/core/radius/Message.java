@@ -14,7 +14,6 @@ import java.util.logging.Logger;
  * The class Message models the base class of all RADIUS messages.
  */
 public abstract class Message {
-    protected final static Logger LOGGER = Logger.getLogger(Message.class.getCanonicalName());
     
     /** The Constant NONE in case no MID has been set */
     public static final int NONE = -1;
@@ -103,6 +102,16 @@ public abstract class Message {
      */
     public int getMID() {
         return mid;
+    }
+    
+    /**
+     * Gets the 8-bit message identification as String.
+     * 
+     * @return the mid
+     */
+    public String getMIDString() {
+        if(mid == NONE) return "NONE";
+        return String.valueOf(mid);
     }
     
     /**

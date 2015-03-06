@@ -19,6 +19,10 @@ public class EmptyMessage extends Message {
     public EmptyMessage(RADIUS.Code code) {
         super(code);
     }
+
+    public EmptyMessage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /* (non-Javadoc)
      * @see java.langObject#toString()
