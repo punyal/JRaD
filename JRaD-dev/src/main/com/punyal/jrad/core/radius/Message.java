@@ -6,7 +6,10 @@
 
 package com.punyal.jrad.core.radius;
 
+import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
+
 import java.net.InetAddress;
+import java.util.Arrays;
 
 
 /**
@@ -123,9 +126,10 @@ public abstract class Message {
      * @return this Message
      */
     public Message setMID(int mid) {
-        if(mid >= 1<<8 || mid < NONE)
+        if(mid >= 1 << 8 || mid < NONE)
 			throw new IllegalArgumentException("The MID must be a 8-bit number between 0 and "+((1<<8)-1)+" inclusive but was "+mid);
-        this.mid = mid;
+        if(mid >= (1 << 8) -1) this.mid = NONE;
+        else this.mid = mid;
         return this;
     }
     
@@ -197,7 +201,7 @@ public abstract class Message {
      * @return this Message
      */
     public Message setAuthenticator(byte[] authenticator){
-        this.authenticator = authenticator;
+        this.authenticator = Arrays.copyOfRange(authenticator, 0, AUTHENTICATOR_BITS/8);
         return this;
     }
     

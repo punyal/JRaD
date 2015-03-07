@@ -16,6 +16,7 @@ import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.LENGTH_BITS;
 import com.punyal.jrad.core.radius.EmptyMessage;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
+import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 import com.punyal.jrad.core.radius.Request;
 
 public class DataParser {
@@ -80,7 +81,7 @@ public class DataParser {
         message.setMID(mid);
         message.setLength(length);
         
-        message.setAuthenticator(reader.readBytesLeft());
+        message.setAuthenticator(reader.readBytes(AUTHENTICATOR_BITS/8));
         // TODO: ADD attributes and modify authenticator
     }
 }
