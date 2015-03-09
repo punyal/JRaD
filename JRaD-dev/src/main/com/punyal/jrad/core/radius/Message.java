@@ -9,6 +9,7 @@ package com.punyal.jrad.core.radius;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -39,7 +40,7 @@ public abstract class Message {
     private byte[] authenticator;
     
     /** The set of attributes of this message */
-    //private AttributeSet attributes; // TODO: implement this functionality
+    ArrayList <AttributesMessage> Attributes = new ArrayList <> ();
     
     /** The destination address of the message */
     private InetAddress destination;
@@ -205,31 +206,12 @@ public abstract class Message {
         return this;
     }
     
-    // TODO: implement Attributes
-//    /**
-//     * Gets the set of attributes. If no set has been defined yet, it creates a new one.
-//     * EmptyMessages should not have any attribute.
-//     * 
-//     * @return the attributes
-//     */
-//    public AttributeSet getAttributes() {
-//        if(attributes == null)
-//            attributes = new AttributeSet();
-//        return attributes;
-//    }
-//    
-//    /**
-//     * Sets the set of attributes. This function makes a defensive copy of the
-//     * specified set of attributes.
-//     * Provides a fluent API to chain setters.
-//     * 
-//     * @param attributes the new options
-//     * @return this Message
-//     */
-//    public Message setAttributes(AttributeSet attributes){
-//        this.attributes = new AttributeSet(attributes);
-//        return this;
-//    }
+    
+    public int numberOfAttributes() {return this.Attributes.size();}
+    
+    public void addAttribute(AttributesMessage att) {this.Attributes.add(att);}
+    public ArrayList<AttributesMessage> getAttributes() {return this.Attributes;}
+    public AttributesMessage getAttributes(int index) {return this.Attributes.get(index);}
     
     /**
      * Gets the destination address.

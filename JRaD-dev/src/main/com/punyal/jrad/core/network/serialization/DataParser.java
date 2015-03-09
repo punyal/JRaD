@@ -7,6 +7,7 @@
 package com.punyal.jrad.core.network.serialization;
 
 import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.radius.AttributesMessage;
 import com.punyal.jrad.core.radius.AttributesRADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.Code.ACCESS_ACCEPT;
 import static com.punyal.jrad.core.radius.RADIUS.Code.ACCOUNTING_REQUEST;
@@ -87,11 +88,9 @@ public class DataParser {
         
         int bytesWaitingToRead = length - Message.MINIMAL;
         
-        System.out.println("attributesLen: "+bytesWaitingToRead);
         
         while(bytesWaitingToRead > 2) {
             int attType, attLen;
-            byte[] attPayload;
             
             //AttributeType
             attType = reader.readNextByte();
@@ -99,33 +98,14 @@ public class DataParser {
             attLen = reader.readNextByte();
             bytesWaitingToRead--;
             
-            AttributesRADIUS attTemp = RADIUS.getAttributeRADIUS(attType);
-            
-            System.out.println(String.format(" %-2d %-25s %-4s %-9s %-6s %-6s %-7s %-8s %s\n",
-                    attTemp.getTypeValue(),
-                    attTemp.getType(),
-                    attTemp.getMinLength(),
-                    attTemp.getFieldType(),
-                    attTemp.isRequest(),
-                    attTemp.isAcept(),
-                    attTemp.isReject(),
-                    attTemp.isChallenge(),
-                    attTemp.isUnique()
-                    ));
-            
             if((attLen-2) <= bytesWaitingToRead) {
-                attPayload = reader.readBytes(attLen-2);
                 bytesWaitingToRead -= (attLen-2);
+                AttributesMessage temp = new AttributesMessage(RADIUS.Type.valueOf(attType));
+                temp.setValue(reader.readBytes(attLen-2));
+                message.addAttribute(temp);
             } else {
                 throw new IllegalArgumentException("There is an length error parsing");
             }
-            
-            
-            System.out.println(String.format("# %s (%s) %s",
-                    attType,
-                    attLen,
-                    Utils.toHexString(attPayload)));
-            
         }
         
         

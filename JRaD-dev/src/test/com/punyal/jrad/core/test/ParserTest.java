@@ -112,25 +112,9 @@ public class ParserTest {
         }
         
         
+     
         
-        
-        AttributesMessage temp = new AttributesMessage(RADIUS.Type.USER_NAME);
-        //AttributesRADIUS temp1 = RADIUS.getAttributeRADIUS(4);
-        //AttributesRADIUS temp = new AttributesRADIUS(RADIUS.getAttributeRADIUS(4));
-//        System.out.println(String.format(" %-2d %-25s %-4s %-9s %-6s %-6s %-7s %-8s %s\n",
-//                    temp.getTypeValue(),
-//                    temp.getType(),
-//                    temp.getMinLength(),
-//                    temp.getFieldType(),
-//                    temp.isRequest(),
-//                    temp.isAcept(),
-//                    temp.isReject(),
-//                    temp.isChallenge(),
-//                    temp.isUnique()
-//                    ));
-        temp.setValue("Pablo");
-        
-        System.out.println(temp.print());
+       
         
         //System.out.println(Utils.printAttributesDB());
         System.out.println("# Test (STOP)");

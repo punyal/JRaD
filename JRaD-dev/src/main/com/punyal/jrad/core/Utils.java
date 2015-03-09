@@ -7,6 +7,8 @@
 package com.punyal.jrad.core;
 
 import com.punyal.jrad.core.radius.*;
+import com.sun.org.apache.xml.internal.serializer.utils.AttList;
+import java.util.ArrayList;
 
 public class Utils {
     // Prevent initialization
@@ -61,6 +63,7 @@ public class Utils {
         info.append(String.format("MID: %s\n", m.getMIDString()));
         info.append(String.format("Length: %d\n", m.getLength()));
         info.append(String.format("Authenticator: %s\n", toHexString(m.getAuthenticator())));
+        info.append(String.format("Attributes: %d\n", m.numberOfAttributes()));
         info.append("==================================================\n");
         return info.toString();
     }
@@ -71,12 +74,21 @@ public class Utils {
      * @return 
      */
     public static String messagePrint(Request m) {
+        ArrayList<AttributesMessage> attributes = m.getAttributes();
         StringBuilder info = new StringBuilder();
         info.append("==[RADIUS Request]================================\n");
         info.append(String.format("Code: %s\n", m.getCode()));
         info.append(String.format("MID: %s\n", m.getMIDString()));
         info.append(String.format("Length: %d\n", m.getLength()));
         info.append(String.format("Authenticator: %s\n", toHexString(m.getAuthenticator())));
+        if(attributes.size() > 0){
+            info.append(String.format("Attributes: %d\n", attributes.size()));
+            
+            for (AttributesMessage attribute : attributes) {
+                info.append(String.format("%-2d %-25s\n", attribute.getTypeValue(), attribute.getType()));
+            }
+        }
+        
         info.append("==================================================\n");
         return info.toString();
     }
