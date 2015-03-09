@@ -26,6 +26,22 @@ public class AttributesRADIUS extends Attribute {
         this.challenge = challenge;
         this.unique = unique;
     }
+    public AttributesRADIUS(AttributesRADIUS temp) {
+        super(temp.getType(),temp.getValue());
+        this.copyAttributesRADIUS(temp);
+    }
+    
+    public void copyAttributesRADIUS(AttributesRADIUS att) {
+        this.request = att.request;
+        this.acept = att.acept;
+        this.reject = att.reject;
+        this.challenge = att.challenge;
+        this.unique = att.unique;
+        this.minLength = att.minLength;
+        this.fieldType = att.fieldType;
+        this.setType(att.getType());
+        this.setValue(att.getValue());    
+    }
     
     public Field getFieldType() {return this.fieldType;}
     public boolean isRequest() {return this.request;}

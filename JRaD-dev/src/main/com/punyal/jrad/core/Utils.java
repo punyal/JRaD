@@ -107,16 +107,6 @@ public class Utils {
                     attributesDB.isChallenge(),
                     attributesDB.isUnique()
                     ));
-//            info.append("# " + RADIUS.attributesDB[i].getType()
-//                    + "["+ RADIUS.attributesDB[i].getTypeValue() +"]"
-//                    + "\t\t" + RADIUS.attributesDB[i].getMinLength()
-//                    + "  " + RADIUS.attributesDB[i].getFieldType()
-//                    + "\t" + RADIUS.attributesDB[i].isRequest()
-//                    + "\t" + RADIUS.attributesDB[i].isAcept()
-//                    + "\t" + RADIUS.attributesDB[i].isReject()
-//                    + "\t" + RADIUS.attributesDB[i].isChallenge()
-//                    + "\t" + RADIUS.attributesDB[i].isUnique()
-//                    + "\n");
         }
         info.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         return info.toString();

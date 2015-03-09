@@ -124,7 +124,8 @@ public class RADIUS {
         CHAP_CHALLENGE             (60),
         NAS_PORT_TYPE              (61),
         PORT_LIMIT                 (62),
-        LOGIN_LAT_PORT             (63);
+        LOGIN_LAT_PORT             (63),
+        UNKNOWN_TYPE              (100);
         
          /* The code value. */
  	public final int value;
@@ -175,6 +176,7 @@ public class RADIUS {
                 case 61:     return NAS_PORT_TYPE;
                 case 62:     return PORT_LIMIT;
                 case 63:     return LOGIN_LAT_PORT;
+                case 100:    return UNKNOWN_TYPE;
                 default: throw new IllegalArgumentException("Unknown RADIUS 2865 Attribute "+value); 
             }
         }        
@@ -266,5 +268,10 @@ public class RADIUS {
     new AttributesRADIUS(PORT_LIMIT,                6, VALUE,   true,  true,  false, false, true ),
     new AttributesRADIUS(LOGIN_LAT_PORT,            0, STRING,  true,  true,  false, false, true )};
     
-    
+    public static AttributesRADIUS getAttributeRADIUS(int value) {
+        for (AttributesRADIUS attribut : RADIUS.attributesDB) {
+            if( attribut.getTypeValue() == value ) return attribut;
+        }
+        return new AttributesRADIUS(UNKNOWN_TYPE, 0, UNKNOWN, false, false, false, false, false);
+    }
 }

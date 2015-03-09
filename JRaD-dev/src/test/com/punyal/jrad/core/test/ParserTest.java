@@ -6,21 +6,17 @@
 
 package com.punyal.jrad.core.test;
 
-import static com.punyal.jrad.core.radius.RADIUS.UTF8_CHARSET;
-
-import com.punyal.jrad.*;
-import com.punyal.jrad.core.*;
+import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.serialization.DataParser;
-import com.punyal.jrad.core.network.serialization.Serializer;
-import com.punyal.jrad.core.radius.*;
-import static com.punyal.jrad.core.radius.Attribute.Field.*;
-import static com.punyal.jrad.core.radius.RADIUS.Type.*;
-import com.punyal.jrad.elements.RawData;
+import com.punyal.jrad.core.radius.AttributesMessage;
+import com.punyal.jrad.core.radius.AttributesRADIUS;
+import com.punyal.jrad.core.radius.RADIUS;
+import com.punyal.jrad.core.radius.Request;
 
 
-public class MessageTester{
-    
-    public static void main(String[] args){
+
+public class ParserTest {
+    public static void main(String[] args) {
         System.out.println("# Test (START)");
         
         String realRequest = "01c1006fbcd3" +
@@ -104,26 +100,8 @@ public class MessageTester{
 //    Vendor-length:  06 (6)    
 //    String:         0005dc00 [?]
 //    ======================================================================
-        
-        
         DataParser parser = new DataParser(Utils.hexStringToByteArray(realRequest));
-  
-//        Request test = Request.newAccounting();
-//        test.setAuthenticator("es una prueba!!12345679");
-//        System.out.print(Utils.messagePrint(test)); 
-//        
-//        Serializer buffer = new Serializer();
-//        RawData buf = buffer.serialize(test);
-//        
-//        
-//        DataParser parser = new DataParser(buf.getBytes());
-//        
-//        System.out.println("Empty: "+parser.isEmpty());
-//        System.out.println("Request: "+parser.isRequest());
-//        System.out.println("Response: "+parser.isResponse());
-//        System.out.println("Buff: "+ Utils.toHexString(buf.getBytes()).toUpperCase());
-//        System.out.println("Buff: "+ Utils.toBinaryString(buf.getBytes()));
-//        
+        
         Request request;
         try {
             request = parser.parseRequest();
@@ -134,16 +112,28 @@ public class MessageTester{
         }
         
         
-        Attribute att = new Attribute(RADIUS.Type.CALLBACK_ID,"hola");
         
         
-        System.out.println("[" + att.getType() + "|"
-                               + att.getLength() + "|"
-                               + Utils.toHexString(att.getValue()) + "]");
+        AttributesMessage temp = new AttributesMessage(RADIUS.Type.USER_NAME);
+        //AttributesRADIUS temp1 = RADIUS.getAttributeRADIUS(4);
+        //AttributesRADIUS temp = new AttributesRADIUS(RADIUS.getAttributeRADIUS(4));
+//        System.out.println(String.format(" %-2d %-25s %-4s %-9s %-6s %-6s %-7s %-8s %s\n",
+//                    temp.getTypeValue(),
+//                    temp.getType(),
+//                    temp.getMinLength(),
+//                    temp.getFieldType(),
+//                    temp.isRequest(),
+//                    temp.isAcept(),
+//                    temp.isReject(),
+//                    temp.isChallenge(),
+//                    temp.isUnique()
+//                    ));
+        temp.setValue("Pablo");
+        
+        System.out.println(temp.print());
         
         //System.out.println(Utils.printAttributesDB());
-        
-        System.out.println("# Test (END)");
+        System.out.println("# Test (STOP)");
     }
-    
 }
+    
