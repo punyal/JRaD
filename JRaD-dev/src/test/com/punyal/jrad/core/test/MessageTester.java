@@ -13,6 +13,8 @@ import com.punyal.jrad.core.*;
 import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import com.punyal.jrad.core.radius.*;
+import static com.punyal.jrad.core.radius.Attribute.Field.*;
+import static com.punyal.jrad.core.radius.RADIUS.Type.*;
 import com.punyal.jrad.elements.RawData;
 
 
@@ -132,7 +134,14 @@ public class MessageTester{
         }
         
         
+        Attribute att = new Attribute(RADIUS.Type.CALLBACK_ID,"hola");
         
+        
+        System.out.println("[" + att.getType() + "|"
+                               + att.getLength() + "|"
+                               + Utils.toHexString(att.getValue()) + "]");
+        
+        System.out.println(Utils.printAttributesDB());
         
         System.out.println("# Test (END)");
     }

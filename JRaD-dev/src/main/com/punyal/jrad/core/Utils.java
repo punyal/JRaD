@@ -56,8 +56,6 @@ public class Utils {
      */
     public static String messagePrint(EmptyMessage m) {
         StringBuilder info = new StringBuilder();
-        String string_t;
-        int int_t;
         info.append("==[RADIUS EmptyMessage]===========================\n");
         info.append(String.format("Code: %s\n", m.getCode()));
         info.append(String.format("MID: %s\n", m.getMIDString()));
@@ -74,14 +72,53 @@ public class Utils {
      */
     public static String messagePrint(Request m) {
         StringBuilder info = new StringBuilder();
-        String string_t;
-        int int_t;
         info.append("==[RADIUS Request]================================\n");
         info.append(String.format("Code: %s\n", m.getCode()));
         info.append(String.format("MID: %s\n", m.getMIDString()));
         info.append(String.format("Length: %d\n", m.getLength()));
         info.append(String.format("Authenticator: %s\n", toHexString(m.getAuthenticator())));
         info.append("==================================================\n");
+        return info.toString();
+    }
+    
+    public static String printAttributesDB() {
+        StringBuilder info = new StringBuilder();
+        info.append("~~~~~~~~~~~~~~~~~~~~~~~~ RFC 2865 Supported Attributes ~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        info.append(String.format(" %-2s %-22s %s %s %s %s %s %s %s\n",
+                    "#",
+                    "Attribute",
+                    "MinLen",
+                    "FieldType",
+                    "Request",
+                    "Acept",
+                    "Reject",
+                    "Challenge",
+                    "Unique"
+                    ));
+        for (AttributesRADIUS attributesDB : RADIUS.attributesDB) {
+            info.append(String.format(" %-2d %-25s %-4s %-9s %-6s %-6s %-7s %-8s %s\n",
+                    attributesDB.getTypeValue(),
+                    attributesDB.getType(),
+                    attributesDB.getMinLength(),
+                    attributesDB.getFieldType(),
+                    attributesDB.isRequest(),
+                    attributesDB.isAcept(),
+                    attributesDB.isReject(),
+                    attributesDB.isChallenge(),
+                    attributesDB.isUnique()
+                    ));
+//            info.append("# " + RADIUS.attributesDB[i].getType()
+//                    + "["+ RADIUS.attributesDB[i].getTypeValue() +"]"
+//                    + "\t\t" + RADIUS.attributesDB[i].getMinLength()
+//                    + "  " + RADIUS.attributesDB[i].getFieldType()
+//                    + "\t" + RADIUS.attributesDB[i].isRequest()
+//                    + "\t" + RADIUS.attributesDB[i].isAcept()
+//                    + "\t" + RADIUS.attributesDB[i].isReject()
+//                    + "\t" + RADIUS.attributesDB[i].isChallenge()
+//                    + "\t" + RADIUS.attributesDB[i].isUnique()
+//                    + "\n");
+        }
+        info.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         return info.toString();
     }
 }
