@@ -227,7 +227,7 @@ public class RADIUS {
     // ALL RFC 2865 SUPPORTED RADIUS ATTRIBUTES
     public static AttributesRADIUS[] attributesDB = {
     new AttributesRADIUS(USER_NAME,                 0, STRING,  true,  true,  false, false, true ),
-    new AttributesRADIUS(USER_PASSWORD,             0, STRING,  true,  false, false, false, true ),
+    new AttributesRADIUS(USER_PASSWORD,             0, VALUE,  true,  false, false, false, true ),
     new AttributesRADIUS(CHAP_PASSWORD,             0, UNKNOWN, true,  false, false, false, true ),
     new AttributesRADIUS(NAS_IP_ADDRESS,            6, ADDRESS, true,  false, false, false, true ),
     new AttributesRADIUS(NAS_PORT,                  6, VALUE,   true,  false, false, false, true ),

@@ -6,8 +6,6 @@
 
 package com.punyal.jrad.core.radius;
 
-import com.punyal.jrad.core.*;
-import com.punyal.jrad.core.radius.*;
 
 /**
  * Standard RADIUS request class
@@ -17,7 +15,10 @@ public class Request extends Message {
     /** The request code. */
     private final RADIUS.Code code;
     
-    /**
+    /** The current response for the request. */
+	private Response response;
+    
+        /**
      * Instantiates a new request with the specified RADIUS code
      * 
      * @param code the request code

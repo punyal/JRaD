@@ -7,6 +7,8 @@
 package com.punyal.jrad.core.radius;
 
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
+import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
+import static com.punyal.jrad.core.radius.RADIUS.Type.VENDOR_SPECIFIC;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -209,9 +211,54 @@ public abstract class Message {
     
     public int numberOfAttributes() {return this.Attributes.size();}
     
-    public void addAttribute(AttributesMessage att) {this.Attributes.add(att);}
+    public void addAttribute(AttributesMessage att) {
+        this.Attributes.add(att);
+        //this.length += att.getLength();
+        //if(att.getType().equals(VENDOR_SPECIFIC) ) this.length += att.getVendorValue().length +2;
+    }
+    public void newAttribute(RADIUS.Type type, byte[] value, int chapIdent, int vendorID, int vendorType, byte[] vendorValue) {
+        AttributesMessage temp = new AttributesMessage(type);
+        temp.setValue(value);
+        temp.setChapIdent(chapIdent);
+        temp.setVendorID(vendorID);
+        temp.setVendorType(vendorType);
+        temp.setVendorValue(vendorValue);
+        this.addAttribute(temp);    
+    }
+    
+    public void newAttribute(RADIUS.Type type, byte[] value) {
+        if(type.equals(CHAP_PASSWORD)||type.equals(VENDOR_SPECIFIC))
+            throw new IllegalArgumentException("Illegal Attribute type " + type);
+        AttributesMessage temp = new AttributesMessage(type);
+        temp.setValue(value);
+        this.addAttribute(temp);
+    }
+    
+    public void newAttribute(RADIUS.Type type, byte[] value, int chapIdent) {
+        if(!type.equals(CHAP_PASSWORD))
+            throw new IllegalArgumentException("Illegal Attribute type " + type);
+        AttributesMessage temp = new AttributesMessage(type);
+        temp.setValue(value);
+        temp.setChapIdent(chapIdent);
+        this.addAttribute(temp);
+    }
+    
+    public void newAttribute(RADIUS.Type type, int vendorID, int vendorType, byte[] vendorValue) {
+        if(!type.equals(VENDOR_SPECIFIC))
+            throw new IllegalArgumentException("Illegal Attribute type " + type);
+        AttributesMessage temp = new AttributesMessage(type);
+        temp.setVendorID(vendorID);
+        temp.setVendorType(vendorType);
+        temp.setVendorValue(vendorValue);
+        this.addAttribute(temp);    
+    }
+     
     public ArrayList<AttributesMessage> getAttributes() {return this.Attributes;}
     public AttributesMessage getAttributes(int index) {return this.Attributes.get(index);}
+    
+    public void recalculateLength() {
+        //Do some magic here!
+    }
     
     /**
      * Gets the destination address.

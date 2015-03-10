@@ -8,10 +8,8 @@ package com.punyal.jrad.core.test;
 
 import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.serialization.DataParser;
-import com.punyal.jrad.core.radius.AttributesMessage;
-import com.punyal.jrad.core.radius.AttributesRADIUS;
-import com.punyal.jrad.core.radius.RADIUS;
 import com.punyal.jrad.core.radius.Request;
+import com.punyal.jrad.core.radius.Response;
 
 
 
@@ -110,10 +108,19 @@ public class ParserTest {
         } catch (IllegalStateException e) {
             //String log = "message format error caused by " + buf.getInetSocketAddress();
         }
-        
-        
      
         
+        DataParser parser2 = new DataParser(Utils.hexStringToByteArray(realResponse));
+        
+        Response response;
+        try {
+            response = parser2.parseResponse();
+            System.out.print(Utils.messagePrint(response)); 
+            
+        } catch (IllegalStateException e) {
+            //String log = "message format error caused by " + buf.getInetSocketAddress();
+        }
+       
        
         
         //System.out.println(Utils.printAttributesDB());

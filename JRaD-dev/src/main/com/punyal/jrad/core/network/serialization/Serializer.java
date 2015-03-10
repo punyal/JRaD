@@ -8,6 +8,7 @@ package com.punyal.jrad.core.network.serialization;
 
 import com.punyal.jrad.core.radius.EmptyMessage;
 import com.punyal.jrad.core.radius.Request;
+import com.punyal.jrad.core.radius.Response;
 import com.punyal.jrad.elements.RawData;
 
 public class Serializer {
@@ -24,6 +25,14 @@ public class Serializer {
             bytes = new DataSerializer().serializeRequest(request);
         request.setBytes(bytes);
         return new RawData(bytes, request.getDestination(), request.getDestinationPort());
+    }
+    
+    public RawData serialize(Response response) {
+        byte[] bytes = response.getBytes();
+        if (bytes == null)
+            bytes = new DataSerializer().serializeResponse(response);
+        response.setBytes(bytes);
+        return new RawData(bytes, response.getDestination(), response.getDestinationPort());
     }
     
     
