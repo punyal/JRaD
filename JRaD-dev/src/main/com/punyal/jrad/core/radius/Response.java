@@ -6,6 +6,9 @@
 
 package com.punyal.jrad.core.radius;
 
+import com.punyal.jrad.core.network.serialization.Serializer;
+import com.punyal.jrad.elements.RawData;
+
 
 /**
  * Standard RADIUS request class
@@ -51,6 +54,15 @@ public class Response extends Message {
     public Response setAuthenticator(byte[] authenticator){
         super.setAuthenticator(authenticator);
         return this;
+    }
+    
+    
+    
+    
+    
+    public void serialize() {
+        Serializer buffer = new Serializer();
+        RawData buf = buffer.serialize(this);
     }
     
     

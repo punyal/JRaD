@@ -53,23 +53,13 @@ public class SerializerTest {
         test2.newAttribute(VENDOR_SPECIFIC, 14559, 3, Utils.hexStringToByteArray("3b997ffd"));
         test2.newAttribute(VENDOR_SPECIFIC, 14122, 7, Utils.hexStringToByteArray("0005dc00"));
         
-       
-        
-        //System.out.print(Utils.messagePrint(test));
         System.out.print(Utils.messagePrint(test2));
         
+        test2.serialize();
         
-        
-        Serializer buffer = new Serializer();
-        RawData buf = buffer.serialize(test2);
-        
-        
-        
-        DataParser parser = new DataParser(buf.getBytes());
-//        System.out.println("Empty: "+parser.isEmpty());
-//        System.out.println("Request: "+parser.isRequest());
-//        System.out.println("Response: "+parser.isResponse());
-        
+        System.out.println(Utils.toHexString(test2.getBytes()));
+                
+        DataParser parser = new DataParser(test2.getBytes());
         
         if(parser.isRequest()) {
             Request message;
@@ -78,7 +68,7 @@ public class SerializerTest {
                 System.out.print(Utils.messagePrint(message)); 
 
             } catch (IllegalStateException e) {
-                //String log = "message format error caused by " + buf.getInetSocketAddress();
+                
             }
         } else {
             Response message;
@@ -87,16 +77,10 @@ public class SerializerTest {
                 System.out.print(Utils.messagePrint(message)); 
 
             } catch (IllegalStateException e) {
-                //String log = "message format error caused by " + buf.getInetSocketAddress();
+                
             }
             
         }
-        
-        
-        
-        
-        
-        
         
         System.out.println("# Test (STOP)");
     }

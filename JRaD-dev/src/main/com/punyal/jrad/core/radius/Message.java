@@ -6,9 +6,11 @@
 
 package com.punyal.jrad.core.radius;
 
+import com.punyal.jrad.core.network.serialization.Serializer;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.VENDOR_SPECIFIC;
+import com.punyal.jrad.elements.RawData;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
