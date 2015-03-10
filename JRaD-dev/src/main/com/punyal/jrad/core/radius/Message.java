@@ -64,6 +64,7 @@ public abstract class Message {
      * has happened yet.
      */
     private long timestamp;
+    private int MINIMUM;
     
     /**
      * Instances a new message with no specified message code.
@@ -213,8 +214,7 @@ public abstract class Message {
     
     public void addAttribute(AttributesMessage att) {
         this.Attributes.add(att);
-        //this.length += att.getLength();
-        //if(att.getType().equals(VENDOR_SPECIFIC) ) this.length += att.getVendorValue().length +2;
+        this.recalculateLength();
     }
     public void newAttribute(RADIUS.Type type, byte[] value, int chapIdent, int vendorID, int vendorType, byte[] vendorValue) {
         AttributesMessage temp = new AttributesMessage(type);
@@ -257,7 +257,20 @@ public abstract class Message {
     public AttributesMessage getAttributes(int index) {return this.Attributes.get(index);}
     
     public void recalculateLength() {
-        //Do some magic here!
+        this.length = MINIMAL;
+        this.Attributes.stream().forEach((attribute) -> {
+            switch(attribute.getType()) {
+                case VENDOR_SPECIFIC:
+                    this.length += (attribute.getVendorValue().length +8);
+                    break;
+                case CHAP_PASSWORD:
+                    this.length += (attribute.getValue().length +3);
+                    break;
+                default:
+                    this.length += (attribute.getValue().length +2);
+                    break;
+                }
+        });
     }
     
     /**
