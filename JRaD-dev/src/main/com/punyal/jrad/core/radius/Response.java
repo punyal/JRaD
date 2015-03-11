@@ -6,6 +6,7 @@
 
 package com.punyal.jrad.core.radius;
 
+import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import com.punyal.jrad.elements.RawData;
 
@@ -15,45 +16,18 @@ import com.punyal.jrad.elements.RawData;
  */
 
 public class Response extends Message {
-    /** The Response code. */
-    private final RADIUS.Code code;
+    /** The Response code.
+     * @param code */
+    //private final RADIUS.Code code;
     
     public Response(RADIUS.Code code){
+        super(code);
+        //this.code = code;
+    }
+    
+    public Response(){
         super();
-        this.code = code;
-    }
-    
-    /**
-     * Gets the request code
-     * @return 
-     */
-    @Override
-    public RADIUS.Code getCode(){
-        return code;
-    }
-    
-    /**
-     * Sets the authenticator as String
-     * 
-     * @param authenticator
-     * @return 
-     */
-    @Override
-    public Response setAuthenticator(String authenticator) {
-        super.setAuthenticator(authenticator);
-        return this;
-    }
-    
-    /**
-     * Sets the authenticator as byte array
-     * 
-     * @param authenticator
-     * @return 
-     */
-    @Override
-    public Response setAuthenticator(byte[] authenticator){
-        super.setAuthenticator(authenticator);
-        return this;
+        //this.code = code;
     }
     
     
@@ -63,6 +37,12 @@ public class Response extends Message {
     public void serialize() {
         Serializer buffer = new Serializer();
         RawData buf = buffer.serialize(this);
+    }
+    
+    public void parse(){
+        this.clearAttributes();
+        DataParser parser = new DataParser(this.getBytes());
+        parser.parseMessagetest(this);
     }
     
     

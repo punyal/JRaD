@@ -80,6 +80,11 @@ public class DataParser {
         return response;
     }
     
+    public void parseMessagetest(Message message) {
+        message.setCode(RADIUS.Code.valueOf(this.code));
+        parseMessage(message);
+    }
+    
     public EmptyMessage parseEmptyMessage() {
         assert(!isRequest() && !isResponse());
         EmptyMessage message = new EmptyMessage();

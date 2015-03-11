@@ -1,18 +1,10 @@
-/**
- * JRaD 2015
- * @author Pablo Puñal Pereira <pablo@punyal.com>
- * @version 0.1
- */
 
 package com.punyal.jrad.core.test;
 
-
 import com.punyal.jrad.core.Utils;
-import com.punyal.jrad.core.network.serialization.*;
 import static com.punyal.jrad.core.radius.RADIUS.Type.*;
 import com.punyal.jrad.core.radius.Request;
 import com.punyal.jrad.core.radius.Response;
-import com.punyal.jrad.elements.RawData;
 
 public class SerializerTest {
     public static void main(String[] args) {
@@ -43,6 +35,11 @@ public class SerializerTest {
         test.newAttribute(USER_PASSWORD, Utils.hexStringToByteArray("bb47ce774c5cb030b7b167ead6851cd7cdf3db8fd4ab1955d1a4c9ad8022947c"));
         test.newAttribute(CALLED_STATION_ID, Utils.stringToByteArray("BB-BB-BB-BB-BB-BB"));
         test.newAttribute(CALLING_STATION_ID, Utils.stringToByteArray("AA-AA-AA-AA-AA-AA"));
+        test.print();
+        test.serialize();
+        System.out.println("Serialization: "+Utils.toHexString(test.getBytes()));
+        test.parse();
+        test.print();
         
         Response test2;
         test2 = Response.newAccessAccept();
@@ -52,35 +49,12 @@ public class SerializerTest {
         test2.newAttribute(VENDOR_SPECIFIC, 14122, 8, Utils.hexStringToByteArray("0005dc00"));
         test2.newAttribute(VENDOR_SPECIFIC, 14559, 3, Utils.hexStringToByteArray("3b997ffd"));
         test2.newAttribute(VENDOR_SPECIFIC, 14122, 7, Utils.hexStringToByteArray("0005dc00"));
-        
-        System.out.print(Utils.messagePrint(test2));
-        
+        test2.print();
         test2.serialize();
+        System.out.println("Serialization: "+Utils.toHexString(test2.getBytes()));
+        test2.parse();
+        test2.print();
         
-        System.out.println(Utils.toHexString(test2.getBytes()));
-                
-        DataParser parser = new DataParser(test2.getBytes());
-        
-        if(parser.isRequest()) {
-            Request message;
-            try {
-                message = parser.parseRequest();
-                System.out.print(Utils.messagePrint(message)); 
-
-            } catch (IllegalStateException e) {
-                
-            }
-        } else {
-            Response message;
-            try {
-                message = parser.parseResponse();
-                System.out.print(Utils.messagePrint(message)); 
-
-            } catch (IllegalStateException e) {
-                
-            }
-            
-        }
         
         System.out.println("# Test (STOP)");
     }

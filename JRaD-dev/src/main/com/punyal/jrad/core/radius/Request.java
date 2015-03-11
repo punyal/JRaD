@@ -6,6 +6,8 @@
 
 package com.punyal.jrad.core.radius;
 
+import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import com.punyal.jrad.elements.RawData;
 
@@ -16,7 +18,6 @@ import com.punyal.jrad.elements.RawData;
 
 public class Request extends Message {
     /** The request code. */
-    private final RADIUS.Code code;
     
     /** The current response for the request. */
 	private Response response;
@@ -27,42 +28,14 @@ public class Request extends Message {
      * @param code the request code
      */
     public Request(RADIUS.Code code){
+        super(code);
+    }
+    
+    public Request(){
         super();
-        this.code = code;
     }
     
-    /**
-     * Gets the request code
-     * @return 
-     */
-    @Override
-    public RADIUS.Code getCode(){
-        return code;
-    }
     
-    /**
-     * Sets the authenticator as String
-     * 
-     * @param authenticator
-     * @return 
-     */
-    @Override
-    public Request setAuthenticator(String authenticator) {
-        super.setAuthenticator(authenticator);
-        return this;
-    }
-    
-    /**
-     * Sets the authenticator as byte array
-     * 
-     * @param authenticator
-     * @return 
-     */
-    @Override
-    public Request setAuthenticator(byte[] authenticator){
-        super.setAuthenticator(authenticator);
-        return this;
-    }
     
     private void validateBeforeSending() {
         if(getDestination() == null) throw new NullPointerException("Destination is null");
@@ -74,6 +47,12 @@ public class Request extends Message {
     public void serialize() {
         Serializer buffer = new Serializer();
         RawData buf = buffer.serialize(this);
+    }
+    
+    public void parse(){
+        this.clearAttributes();
+        DataParser parser = new DataParser(this.getBytes());
+        parser.parseMessagetest(this);
     }
     
     //////////// Some static factory methods for convience ////////////

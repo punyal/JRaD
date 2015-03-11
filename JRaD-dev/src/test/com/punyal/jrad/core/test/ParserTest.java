@@ -8,6 +8,7 @@ package com.punyal.jrad.core.test;
 
 import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.serialization.DataParser;
+import com.punyal.jrad.core.radius.RADIUS;
 import com.punyal.jrad.core.radius.Request;
 import com.punyal.jrad.core.radius.Response;
 
@@ -98,30 +99,17 @@ public class ParserTest {
 //    Vendor-length:  06 (6)    
 //    String:         0005dc00 [?]
 //    ======================================================================
-        DataParser parser = new DataParser(Utils.hexStringToByteArray(realRequest));
         
-        Request request;
-        try {
-            request = parser.parseRequest();
-            System.out.print(Utils.messagePrint(request)); 
-            
-        } catch (IllegalStateException e) {
-            //String log = "message format error caused by " + buf.getInetSocketAddress();
-        }
-     
+        Request requestTest = new Request();
+        requestTest.setBytes(Utils.hexStringToByteArray(realRequest));     
+        requestTest.parse();
+        requestTest.print();
         
-        DataParser parser2 = new DataParser(Utils.hexStringToByteArray(realResponse));
-        
-        Response response;
-        try {
-            response = parser2.parseResponse();
-            System.out.print(Utils.messagePrint(response)); 
-            
-        } catch (IllegalStateException e) {
-            //String log = "message format error caused by " + buf.getInetSocketAddress();
-        }
-       
-       
+        Response responseTest = new Response();
+        responseTest.setBytes(Utils.hexStringToByteArray(realResponse));     
+        responseTest.parse();
+        responseTest.print();
+         
         
         //System.out.println(Utils.printAttributesDB());
         System.out.println("# Test (STOP)");

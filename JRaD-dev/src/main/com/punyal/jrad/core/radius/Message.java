@@ -6,6 +6,7 @@
 
 package com.punyal.jrad.core.radius;
 
+import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
@@ -254,6 +255,11 @@ public abstract class Message {
         temp.setVendorValue(vendorValue);
         this.addAttribute(temp);    
     }
+    
+    public void clearAttributes () {
+        this.Attributes.clear();
+        this.recalculateLength();
+    }
      
     public ArrayList<AttributesMessage> getAttributes() {return this.Attributes;}
     public AttributesMessage getAttributes(int index) {return this.Attributes.get(index);}
@@ -396,5 +402,10 @@ public abstract class Message {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+    
+    public void print() {
+        System.out.print(Utils.messagePrint(this));
+    }
+    
     
 }
