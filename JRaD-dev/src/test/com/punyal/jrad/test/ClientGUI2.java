@@ -3,10 +3,18 @@ package com.punyal.jrad.test;
 import com.punyal.jrad.core.radius.RADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.Code.*;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 
 public class ClientGUI2 {
     
+    JLabel tagOrigin = new JLabel("Origin", JLabel.CENTER);
+    JTextField origin = new JTextField("");
+    JTextField originPort = new JTextField("");
+    JLabel tagDestination = new JLabel("Destination", JLabel.CENTER);
+    JTextField destination = new JTextField("");
+    JTextField destinationPort = new JTextField("");
     JLabel tagCode = new JLabel("Code", JLabel.CENTER);
     JLabel tagID = new JLabel("ID", JLabel.CENTER);
     JLabel tagLength = new JLabel("Length", JLabel.CENTER);
@@ -21,10 +29,16 @@ public class ClientGUI2 {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout layout = new GridLayout(1, 1, 10, 10);
         frame.setLayout(layout);
+        addIPMessage(frame);
         addRADIUSMessage(frame);
         loadRADIUSValues();
         frame.pack();
         frame.setVisible(true);
+    }
+    
+    private void addIPMessage(JFrame frame) {
+        JPanel panel = new JPanel();
+        frame.getContentPane().add(panel);
     }
     
     
@@ -74,9 +88,14 @@ public class ClientGUI2 {
         frame.getContentPane().add(panel);
     }
     
-    public void loadRADIUSValues() {
-        code.addItem(ACCESS_REQUEST);
-        code.addItem(ACCESS_ACCEPT);
+    private void loadRADIUSValues() {
+        
+        // load Codes values
+        ArrayList<RADIUS.Code> codes = new ArrayList<>(Arrays.asList(RADIUS.Code.values()));
+        codes.stream().forEach((current_code) -> {
+            code.addItem(current_code);
+        });
+        
     }
     public static void main(String[] args){
         ClientGUI2 app = new ClientGUI2();
