@@ -16,7 +16,7 @@ public class AttributesRADIUS extends Attribute {
     private Field fieldType;
 
     public AttributesRADIUS(RADIUS.Type type, int minLength, Field fieldType, boolean request, boolean acept, 
-            boolean reject, boolean challenge, boolean unique) {
+        boolean reject, boolean challenge, boolean unique) {
         super(type, "NULL");
         this.minLength = minLength;
         this.fieldType = fieldType;

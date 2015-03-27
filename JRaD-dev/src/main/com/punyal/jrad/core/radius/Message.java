@@ -7,13 +7,16 @@
 package com.punyal.jrad.core.radius;
 
 import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.VENDOR_SPECIFIC;
 import com.punyal.jrad.elements.RawData;
+import java.net.DatagramSocket;
 
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -62,6 +65,9 @@ public abstract class Message {
     /** The serialized message as byte array */
     private byte[] bytes;
     
+    /** The socket connection*/
+    public DatagramSocket socket;
+    
     /**
      * The timestamp when this message has been received or sent or 0 if neither
      * has happened yet.
@@ -83,6 +89,7 @@ public abstract class Message {
      */
     public Message(RADIUS.Code code) {
         this.code = code;
+                
     }
     
     /**
@@ -399,12 +406,29 @@ public abstract class Message {
     *
     * @param timestamp the new timestamp
     */
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setTimestamp() {
+        java.util.Date date= new java.util.Date();
+        this.timestamp = date.getTime();
+    }
+    
+     public void serialize() {
+        Serializer buffer = new Serializer();
+        RawData buf = buffer.serialize(this);
+    }
+    
+    public void parse(){
+        this.clearAttributes();
+        DataParser parser = new DataParser(this.getBytes());
+        parser.parseMessagetest(this);
     }
     
     public void print() {
         System.out.print(Utils.messagePrint(this));
+    }
+    
+    public void send() throws SocketException {
+        this.socket = new DatagramSocket();
+        this.socket.connect(destination, destinationPort);
     }
     
     

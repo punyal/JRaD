@@ -42,6 +42,12 @@ public class DataSerializer {
         return writer.toByteArray();
     }
     
+    public byte[] serializeMessage(Message message){
+        writer = new DatagramWriter();
+        serializeMessage(message, message.getCode().value);
+        return writer.toByteArray();
+    }
+    
     private void serializeMessage(Message message, int code){
         writer.write(code, CODE_BITS);
         writer.write(message.getMID(), IDENTIFIER_BITS);
@@ -61,6 +67,10 @@ public class DataSerializer {
                     writer.writeBytes(attribute.getVendorValue());
                     break;
                 case CHAP_PASSWORD:
+                    writer.write(attribute.getTypeValue(),8);
+                    writer.write(attribute.getValue().length+3,8);
+                    writer.write(attribute.getChapIdent(),8);
+                    writer.writeBytes(attribute.getValue());    
                     break;
                 default:
                     writer.write(attribute.getTypeValue(),8);
@@ -70,4 +80,5 @@ public class DataSerializer {
             }
         });
     }
+    
 }

@@ -9,8 +9,11 @@ package com.punyal.jrad.core;
 import com.punyal.jrad.core.radius.*;
 import static com.punyal.jrad.core.radius.Attribute.Field.STRING;
 import static com.punyal.jrad.core.radius.RADIUS.UTF8_CHARSET;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Utils {
     // Prevent initialization
@@ -64,6 +67,7 @@ public class Utils {
         return data;
     }
     
+    
     /**
      * Formats a EmptyMessage into a readable String representation
      * @param m the EmptyMessage
@@ -90,6 +94,11 @@ public class Utils {
                                 Utils.toHexString(attribute.getVendorValue())));
                         break;
                     case CHAP_PASSWORD:
+                        info.append(String.format("%-2d %-18s (%d) %s\n",
+                                attribute.getTypeValue(),
+                                attribute.getType(),
+                                attribute.getChapIdent(),
+                                attribute.getValueString()));
                         break;
                     default:
                         if(attribute.getFieldType().equals(STRING))

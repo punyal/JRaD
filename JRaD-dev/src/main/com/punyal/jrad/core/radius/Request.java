@@ -43,7 +43,7 @@ public class Request extends Message {
     }
     
     
-    
+    /*
     public void serialize() {
         Serializer buffer = new Serializer();
         RawData buf = buffer.serialize(this);
@@ -53,7 +53,7 @@ public class Request extends Message {
         this.clearAttributes();
         DataParser parser = new DataParser(this.getBytes());
         parser.parseMessagetest(this);
-    }
+    }*/
     
     //////////// Some static factory methods for convience ////////////
     
