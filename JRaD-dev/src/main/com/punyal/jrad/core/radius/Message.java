@@ -411,25 +411,27 @@ public abstract class Message {
         this.timestamp = date.getTime();
     }
     
-     public void serialize() {
+    /**
+     * Serialize the message into the buffer bytes[]
+     */
+    public void serialize() {
         Serializer buffer = new Serializer();
         RawData buf = buffer.serialize(this);
     }
     
+    /**
+     * Parse the buffer bytes[] into a Message
+     */
     public void parse(){
         this.clearAttributes();
         DataParser parser = new DataParser(this.getBytes());
         parser.parseMessagetest(this);
     }
     
+    /**
+     * Prints all the Message information
+     */
     public void print() {
         System.out.print(Utils.messagePrint(this));
     }
-    
-    public void send() throws SocketException {
-        this.socket = new DatagramSocket();
-        this.socket.connect(destination, destinationPort);
-    }
-    
-    
 }

@@ -215,7 +215,7 @@ public class Utils {
                     attributesDB.getMinLength(),
                     attributesDB.getFieldType(),
                     attributesDB.isRequest(),
-                    attributesDB.isAcept(),
+                    attributesDB.isAccept(),
                     attributesDB.isReject(),
                     attributesDB.isChallenge(),
                     attributesDB.isUnique()

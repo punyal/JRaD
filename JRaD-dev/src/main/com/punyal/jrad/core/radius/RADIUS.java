@@ -21,7 +21,7 @@ import java.nio.charset.Charset;
 public class RADIUS {
     
     /** RFC 2865 RADIUS port */
-    public static final int DEFAULT_RADIUS_PORT = 1682;
+    public static final int DEFAULT_RADIUS_PORT = 1812;
     
     /** The RADIUS charset is UTF-8 */
     public static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
@@ -225,6 +225,11 @@ public class RADIUS {
     }
     
     // ALL RFC 2865 SUPPORTED RADIUS ATTRIBUTES
+
+    /**
+     * AttributesRADIUS is a matrix which contains all the definition values per 
+     * attribute type.
+     */
     public static AttributesRADIUS[] attributesDB = {
     new AttributesRADIUS(USER_NAME,                 0, STRING,  true,  true,  false, false, true ),
     new AttributesRADIUS(USER_PASSWORD,             0, VALUE,  true,  false, false, false, true ),
