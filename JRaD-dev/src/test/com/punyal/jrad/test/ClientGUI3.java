@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * JRaD 2015
+ * @author Pablo Puñal Pereira <pablo@punyal.com>
+ * @version 0.1
  */
 package com.punyal.jrad.test;
 

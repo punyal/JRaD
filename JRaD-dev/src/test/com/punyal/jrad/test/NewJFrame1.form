@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Server IP"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+      </Events>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="tagSecretKey" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagServerIP" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagOpt2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagOpt3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagOpt4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagOpt1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagCalledStationID" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagCallingStationID" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagUserPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tagUserName" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="serverIP" max="32767" attributes="0"/>
+                  <Component id="secretKey" max="32767" attributes="0"/>
+                  <Component id="userName" max="32767" attributes="0"/>
+                  <Component id="userPassword" max="32767" attributes="0"/>
+                  <Component id="callingStationID" max="32767" attributes="0"/>
+                  <Component id="calledStationID" max="32767" attributes="0"/>
+                  <Component id="opt1" pref="281" max="32767" attributes="0"/>
+                  <Component id="Opt4" max="32767" attributes="0"/>
+                  <Component id="opt3" max="32767" attributes="0"/>
+                  <Component id="opt2" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="buttonSend" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagServerIP" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="serverIP" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagSecretKey" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="secretKey" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="userName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagUserPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="userPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagCallingStationID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="callingStationID" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagCalledStationID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="calledStationID" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagOpt1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opt1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagOpt2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opt2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagOpt3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opt3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tagOpt4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Opt4" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="buttonSend" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="tagSecretKey">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="NAS Secret Key"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="secretKey">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagServerIP">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Server IP"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="serverIP">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="serverIPActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagUserName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="User Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="userName">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagUserPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="User Password"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="userPassword">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagCallingStationID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Calling Station ID"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="callingStationID">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagCalledStationID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Called Station ID"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="calledStationID">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagOpt1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opt 1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="opt1">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Not used"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagOpt2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opt 2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="opt2">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Not used"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagOpt4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opt 4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tagOpt3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opt 3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="opt3">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Not used"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="Opt4">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Not used"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonSend">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Send"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

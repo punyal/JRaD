@@ -27,6 +27,10 @@ public class UDPSender extends Thread {
         this.stopped = true;
     }
     
+    public DatagramSocket getSocket() {
+        return this.message.socket;
+    }
+    
     public Message getMessage() {
         return this.message;
     }
