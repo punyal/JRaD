@@ -29,6 +29,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -439,7 +440,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
         resetAll();
     }
     
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) throws NoSuchAlgorithmException {                                            
         // TODO add your handling code here:
         RADIUS.Type tempType = (RADIUS.Type) attTypeCombo.getSelectedItem();
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(tempType);
@@ -472,7 +473,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
         recalculateMessageSize();
     }
     
-    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) throws NoSuchAlgorithmException {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) attTree.getLastSelectedPathComponent();
 
         if (node == null)
@@ -781,7 +782,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
         attTreeRoot.removeAllChildren();
         attTreeModel.reload();
         
-        req = new Request();
+        req = new Request("RADIUStest");
         
         seed++;
         seed &= 0xFF;
@@ -862,13 +863,21 @@ public class ClientGUI3 extends javax.swing.JFrame {
         
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                try {
+                    addButtonActionPerformed(evt);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(ClientGUI3.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeButtonActionPerformed(evt);
+                try {
+                    removeButtonActionPerformed(evt);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(ClientGUI3.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
@@ -879,7 +888,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
         });
     }
     
-    private void recalculateMessageSize() {
+    private void recalculateMessageSize() throws NoSuchAlgorithmException {
         req.clearAttributes();
         
         DefaultMutableTreeNode attNode;

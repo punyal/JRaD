@@ -7,16 +7,18 @@
 package com.punyal.jrad.core.radius;
 
 import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.crypto.Crypto;
 import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
+import static com.punyal.jrad.core.radius.RADIUS.Type.USER_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.VENDOR_SPECIFIC;
 import com.punyal.jrad.elements.RawData;
 import java.net.DatagramSocket;
 
 import java.net.InetAddress;
-import java.net.SocketException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,6 +45,9 @@ public abstract class Message {
     
     /** The 16-bit Message Length */
     private int length = MINIMAL;
+    
+    /** The X-bit Secret Key for encryption */
+    private byte[] secretKey;
     
     /** The 128-bit Authenticator (16 octets) */
     private byte[] authenticator;
@@ -76,20 +81,50 @@ public abstract class Message {
     private int MINIMUM;
     
     /**
-     * Instances a new message with no specified message code.
+     * ALL constructors requires the SecretKey.
+     * Secret Key must be not accessible and only writable ones.
      */
-    public Message() {}
+    
+    /**
+     * Instances a new message with no specified message code.
+     * @param secretKey
+     */
+    public Message(String secretKey) {
+        this.secretKey = Utils.stringToByteArray(secretKey);
+    }
+    
+    /**
+     * Instances a new message with no specified message code.
+     * @param secretKey
+     */
+    public Message(byte[] secretKey) {
+        this.secretKey = secretKey;
+    }
     
     /**
      * Instantiates a new message with the given code. The code must be one of 
      * {Access-Request, Access-Accept, Access-Reject, Accounting-Request
      * ,Accounting-Response, Access-Challenge, Status-Server, Status-Client, Reserved}
      * 
+     * @param secretKey
      * @param code the code
      */
-    public Message(RADIUS.Code code) {
+    public Message(String secretKey, RADIUS.Code code) {
+        this.secretKey = Utils.stringToByteArray(secretKey);
         this.code = code;
-                
+    }
+    
+    /**
+     * Instantiates a new message with the given code. The code must be one of 
+     * {Access-Request, Access-Accept, Access-Reject, Accounting-Request
+     * ,Accounting-Response, Access-Challenge, Status-Server, Status-Client, Reserved}
+     * 
+     * @param secretKey
+     * @param code the code
+     */
+    public Message(byte[] secretKey, RADIUS.Code code) {
+        this.secretKey = secretKey;
+        this.code = code;
     }
     
     /**
@@ -236,11 +271,16 @@ public abstract class Message {
         this.addAttribute(temp);    
     }
     
-    public void newAttribute(RADIUS.Type type, byte[] value) {
+    public void newAttribute(RADIUS.Type type, byte[] value) throws NoSuchAlgorithmException {
         if(type.equals(CHAP_PASSWORD)||type.equals(VENDOR_SPECIFIC))
             throw new IllegalArgumentException("Illegal Attribute type " + type);
         AttributesMessage temp = new AttributesMessage(type);
-        temp.setValue(value);
+        // check if encryption is needed
+        if(type.equals(USER_PASSWORD)) {
+            Crypto crypt = new Crypto();
+            temp.setValue(crypt.encrypt(this.secretKey, this.authenticator, value));
+        } else
+            temp.setValue(value);
         this.addAttribute(temp);
     }
     

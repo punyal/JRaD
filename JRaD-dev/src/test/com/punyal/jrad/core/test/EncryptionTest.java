@@ -1,6 +1,7 @@
 package com.punyal.jrad.core.test;
 
 import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.crypto.Crypto;
 import java.security.*;
 
 public class EncryptionTest {
@@ -48,6 +49,9 @@ public class EncryptionTest {
         
         
         // 0c0de8cd7afe016fb24738d7a91e738e
+        
+        Crypto crypt = new Crypto();
+        System.out.println("T: "+Utils.toHexString(crypt.encrypt(secKey, Utils.hexStringToByteArray(auth), originalPass)).toUpperCase());
         
     }
     

@@ -68,7 +68,7 @@ public class DataParser {
     
     public Request parseRequest() {
         assert(isRequest());
-        Request request = new Request(RADIUS.Code.valueOf(code));
+        Request request = new Request("NONE",RADIUS.Code.valueOf(code));
         parseMessage(request);
         return request;
     }
@@ -87,7 +87,7 @@ public class DataParser {
     
     public EmptyMessage parseEmptyMessage() {
         assert(!isRequest() && !isResponse());
-        EmptyMessage message = new EmptyMessage();
+        EmptyMessage message = new EmptyMessage("NONE",RADIUS.Code.RESERVED);
         parseMessage(message);
         return message;
     }

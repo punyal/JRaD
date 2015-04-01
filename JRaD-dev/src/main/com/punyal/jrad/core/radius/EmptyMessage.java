@@ -14,15 +14,23 @@ public class EmptyMessage extends Message {
     /**
      * Instantiates a new empty message.
      * 
+     * @param secretKey
      * @param code the message type
      */
-    public EmptyMessage(RADIUS.Code code) {
-        super(code);
+    public EmptyMessage(String secretKey, RADIUS.Code code) {
+        super(secretKey, code);
+    }
+    
+    /**
+     * Instantiates a new empty message.
+     * 
+     * @param secretKey
+     * @param code the message type
+     */
+    public EmptyMessage(byte[] secretKey, RADIUS.Code code) {
+        super(secretKey, code);
     }
 
-    public EmptyMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     /* (non-Javadoc)
      * @see java.langObject#toString()

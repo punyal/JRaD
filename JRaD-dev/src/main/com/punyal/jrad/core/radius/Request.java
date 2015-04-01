@@ -22,17 +22,32 @@ public class Request extends Message {
     /** The current response for the request. */
 	private Response response;
     
-        /**
+    /**
      * Instantiates a new request with the specified RADIUS code
      * 
+     * @param secretKey
      * @param code the request code
      */
-    public Request(RADIUS.Code code){
-        super(code);
+    public Request(String secretKey, RADIUS.Code code){
+        super(secretKey, code);
     }
     
-    public Request(){
-        super();
+    /**
+     * Instantiates a new request with the specified RADIUS code
+     * 
+     * @param secretKey
+     * @param code the request code
+     */
+    public Request(byte[] secretKey, RADIUS.Code code){
+        super(secretKey, code);
+    }
+    
+    public Request(String secretKey){
+        super(secretKey);
+    }
+    
+    public Request(byte[] secretKey){
+        super(secretKey);
     }
     
     
@@ -62,21 +77,21 @@ public class Request extends Message {
      * 
      * @return a new ACCESS-REQUEST
      */
-    public static Request newAccess() { return new Request(RADIUS.Code.ACCESS_REQUEST); }
+    //public static Request newAccess() { return new Request(RADIUS.Code.ACCESS_REQUEST); }
     
     /**
      * Convenience factory method to construct a ACCOUNTING_REQUEST
      * 
      * @return a new ACCOUNTING_REQUEST
      */
-    public static Request newAccounting() { return new Request(RADIUS.Code.ACCOUNTING_REQUEST); }
+    //public static Request newAccounting() { return new Request(RADIUS.Code.ACCOUNTING_REQUEST); }
     
     /**
      * Convenience factory method to construct a STATUS_CLIENT
      * 
      * @return a new STATUS_CLIENT
      */
-    public static Request newStatusClient() { return new Request(RADIUS.Code.STATUS_CLIENT); }
+    //public static Request newStatusClient() { return new Request(RADIUS.Code.STATUS_CLIENT); }
     
     
 }
