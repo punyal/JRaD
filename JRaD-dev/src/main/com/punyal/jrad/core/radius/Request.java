@@ -20,7 +20,7 @@ public class Request extends Message {
     /** The request code. */
     
     /** The current response for the request. */
-	private Response response;
+	private Message response;
     
     /**
      * Instantiates a new request with the specified RADIUS code
@@ -28,30 +28,14 @@ public class Request extends Message {
      * @param secretKey
      * @param code the request code
      */
-    public Request(String secretKey, RADIUS.Code code){
-        super(secretKey, code);
+    public Request(RADIUS.Code code){
+        super(code);
     }
     
-    /**
-     * Instantiates a new request with the specified RADIUS code
-     * 
-     * @param secretKey
-     * @param code the request code
-     */
-    public Request(byte[] secretKey, RADIUS.Code code){
-        super(secretKey, code);
+    public Request(){
+        super();
     }
-    
-    public Request(String secretKey){
-        super(secretKey);
-    }
-    
-    public Request(byte[] secretKey){
-        super(secretKey);
-    }
-    
-    
-    
+        
     private void validateBeforeSending() {
         if(getDestination() == null) throw new NullPointerException("Destination is null");
         if(getDestinationPort() == 0) throw new NullPointerException("Destination port is 0");

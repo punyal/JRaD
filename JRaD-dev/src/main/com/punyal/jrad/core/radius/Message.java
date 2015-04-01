@@ -26,7 +26,7 @@ import java.util.Arrays;
 /**
  * The class Message models the base class of all RADIUS messages.
  */
-public abstract class Message {
+public class Message {
     
     /** The Constant NONE in case no MID has been set */
     public static final int NONE = -1;
@@ -89,16 +89,7 @@ public abstract class Message {
      * Instances a new message with no specified message code.
      * @param secretKey
      */
-    public Message(String secretKey) {
-        this.secretKey = Utils.stringToByteArray(secretKey);
-    }
-    
-    /**
-     * Instances a new message with no specified message code.
-     * @param secretKey
-     */
-    public Message(byte[] secretKey) {
-        this.secretKey = secretKey;
+    public Message() {
     }
     
     /**
@@ -106,25 +97,26 @@ public abstract class Message {
      * {Access-Request, Access-Accept, Access-Reject, Accounting-Request
      * ,Accounting-Response, Access-Challenge, Status-Server, Status-Client, Reserved}
      * 
-     * @param secretKey
      * @param code the code
      */
-    public Message(String secretKey, RADIUS.Code code) {
-        this.secretKey = Utils.stringToByteArray(secretKey);
+    public Message(RADIUS.Code code) {
         this.code = code;
     }
     
     /**
-     * Instantiates a new message with the given code. The code must be one of 
-     * {Access-Request, Access-Accept, Access-Reject, Accounting-Request
-     * ,Accounting-Response, Access-Challenge, Status-Server, Status-Client, Reserved}
-     * 
-     * @param secretKey
-     * @param code the code
+     * setSecretKey
+     * @param secretKey 
      */
-    public Message(byte[] secretKey, RADIUS.Code code) {
+    public void setSecretKey(String secretKey) {
+        this.secretKey = Utils.stringToByteArray(secretKey);
+    }
+    
+    /**
+     * Set secretKey
+     * @param secretKey 
+     */
+    public void setSecretKey(byte[] secretKey) {
         this.secretKey = secretKey;
-        this.code = code;
     }
     
     /**
@@ -465,7 +457,7 @@ public abstract class Message {
     public void parse(){
         this.clearAttributes();
         DataParser parser = new DataParser(this.getBytes());
-        parser.parseMessagetest(this);
+        parser.parseMessage(this);
     }
     
     /**

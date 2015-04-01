@@ -10,12 +10,10 @@ import com.punyal.jrad.core.radius.AttributesMessage;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.CODE_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.IDENTIFIER_BITS;
 
-import com.punyal.jrad.core.radius.EmptyMessage;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.LENGTH_BITS;
 import com.punyal.jrad.core.radius.Request;
-import com.punyal.jrad.core.radius.Response;
 import java.util.ArrayList;
 
 
@@ -23,6 +21,7 @@ public class DataSerializer {
     
     private DatagramWriter writer;
     
+    /*
     public byte[] serializeRequest(Request request){
         writer = new DatagramWriter();
         RADIUS.Code code = request.getCode();
@@ -41,7 +40,7 @@ public class DataSerializer {
         serializeMessage(message, 0);
         return writer.toByteArray();
     }
-    
+    */
     public byte[] serializeMessage(Message message){
         writer = new DatagramWriter();
         serializeMessage(message, message.getCode().value);

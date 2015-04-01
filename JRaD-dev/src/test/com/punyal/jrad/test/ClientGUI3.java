@@ -782,7 +782,8 @@ public class ClientGUI3 extends javax.swing.JFrame {
         attTreeRoot.removeAllChildren();
         attTreeModel.reload();
         
-        req = new Request("RADIUStest");
+        req = new Request();
+        req.setSecretKey("RADIUStest");
         
         seed++;
         seed &= 0xFF;

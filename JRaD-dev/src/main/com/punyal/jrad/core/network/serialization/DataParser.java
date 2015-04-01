@@ -15,13 +15,10 @@ import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.EMPTY_CODE;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.IDENTIFIER_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.LENGTH_BITS;
 
-import com.punyal.jrad.core.radius.EmptyMessage;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
-import com.punyal.jrad.core.radius.Request;
-import com.punyal.jrad.core.radius.Response;
 
 public class DataParser {
     
@@ -66,9 +63,10 @@ public class DataParser {
         return code == EMPTY_CODE;
     }
     
+    /*
     public Request parseRequest() {
         assert(isRequest());
-        Request request = new Request("NONE",RADIUS.Code.valueOf(code));
+        Request request = new Request(RADIUS.Code.valueOf(code));
         parseMessage(request);
         return request;
     }
@@ -90,9 +88,9 @@ public class DataParser {
         EmptyMessage message = new EmptyMessage("NONE",RADIUS.Code.RESERVED);
         parseMessage(message);
         return message;
-    }
+    }*/
     
-    private void parseMessage(Message message){
+    public void parseMessage(Message message){
         message.setCode(RADIUS.Code.valueOf(code));
         message.setMID(mid);
         message.setLength(length);

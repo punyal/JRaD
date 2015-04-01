@@ -124,9 +124,10 @@ public class MessageTester{
 //        System.out.println("Buff: "+ Utils.toHexString(buf.getBytes()).toUpperCase());
 //        System.out.println("Buff: "+ Utils.toBinaryString(buf.getBytes()));
 //        
-        Request request;
+        Message request = new Message();
         try {
-            request = parser.parseRequest();
+            //request = parser.parseMessage(request);
+            parser.parseMessage(request);
             System.out.print(Utils.messagePrint(request)); 
             
         } catch (IllegalStateException e) {

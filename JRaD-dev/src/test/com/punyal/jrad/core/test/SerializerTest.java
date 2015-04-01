@@ -2,12 +2,14 @@
 package com.punyal.jrad.core.test;
 
 import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.radius.Message;
+import com.punyal.jrad.core.radius.RADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.*;
 import com.punyal.jrad.core.radius.Request;
-import com.punyal.jrad.core.radius.Response;
+import java.security.NoSuchAlgorithmException;
 
 public class SerializerTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println("# Test (START)");
         
         String realRequest = "01c1006fbcd3" +
@@ -28,7 +30,9 @@ public class SerializerTest {
         
      
         Request test;
-        test = Request.newAccess();
+        test = new Request();
+        test.setSecretKey("RADIUStest");
+        test.setCode(RADIUS.Code.ACCESS_REQUEST);
         test.setMID(193);
         test.setAuthenticator(Utils.hexStringToByteArray("bcd3afff1bded406f51fc9fdd66c0d8a"));
         test.newAttribute(USER_NAME, Utils.stringToByteArray("08-ed-b9-00-bc-55"));
@@ -41,8 +45,10 @@ public class SerializerTest {
         test.parse();
         test.print();
         
-        Response test2;
-        test2 = Response.newAccessAccept();
+        Message test2;
+        test2 = new Message();
+        test2.setSecretKey("RADIUStest");
+        test2.setCode(RADIUS.Code.ACCESS_ACCEPT);
         test2.setMID(193);
         test2.setAuthenticator(Utils.hexStringToByteArray("f96c33fb1003dbb6c4a6a064205976bb"));
         test2.newAttribute(VENDOR_SPECIFIC, 14988, 17, Utils.hexStringToByteArray("3b997ffd"));

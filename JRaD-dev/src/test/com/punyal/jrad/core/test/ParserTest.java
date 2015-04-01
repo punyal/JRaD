@@ -8,9 +8,9 @@ package com.punyal.jrad.core.test;
 
 import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.serialization.DataParser;
+import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
 import com.punyal.jrad.core.radius.Request;
-import com.punyal.jrad.core.radius.Response;
 
 
 
@@ -105,7 +105,7 @@ public class ParserTest {
         requestTest.parse();
         requestTest.print();
         
-        Response responseTest = new Response();
+        Message responseTest = new Message();
         responseTest.setBytes(Utils.hexStringToByteArray(realResponse));     
         responseTest.parse();
         responseTest.print();

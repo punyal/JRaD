@@ -6,10 +6,8 @@
 
 package com.punyal.jrad.core.network.serialization;
 
-import com.punyal.jrad.core.radius.EmptyMessage;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.Request;
-import com.punyal.jrad.core.radius.Response;
 import com.punyal.jrad.elements.RawData;
 
 public class Serializer {
