@@ -6,16 +6,24 @@
 
 package com.punyal.jrad.core.network;
 
+import com.punyal.jrad.JRaDclient;
 import com.punyal.jrad.core.radius.Message;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.DatagramPacket;
 
 public class UDPReceiver extends Thread {
+    private ActionEvent event;
     private Message message;
     private boolean stopped = false;
     
     public UDPReceiver(Message message)  {
         this.message =  message;
+        this.event = new ActionEvent(this, 1, "pepe");
+    }
+    
+    public ActionEvent getActionEvent() {
+        return this.event;
     }
     
     public void halt() {

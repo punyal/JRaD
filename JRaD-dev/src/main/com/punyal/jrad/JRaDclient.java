@@ -52,10 +52,19 @@ public class JRaDclient {
             sender.start();
             UDPReceiver receiver = new UDPReceiver(message);
             receiver.start();
+            
+            //receiver.addActionListener(this);
+            
+            // Handler thisHandler = new Handler(receiver)
+            //thisHandler.listenTo();
         } catch (SocketException ex){
             System.err.println("Socket Exception: "+ex);
         }
             
     }
+
+
+    
+    
     
 }
