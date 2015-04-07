@@ -10,7 +10,6 @@ import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
-import com.punyal.jrad.core.radius.Request;
 
 
 
@@ -100,7 +99,7 @@ public class ParserTest {
 //    String:         0005dc00 [?]
 //    ======================================================================
         
-        Request requestTest = new Request();
+        Message requestTest = new Message();
         requestTest.setBytes(Utils.hexStringToByteArray(realRequest));     
         requestTest.parse();
         requestTest.print();

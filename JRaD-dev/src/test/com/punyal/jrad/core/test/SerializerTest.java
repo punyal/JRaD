@@ -5,7 +5,6 @@ import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
 import static com.punyal.jrad.core.radius.RADIUS.Type.*;
-import com.punyal.jrad.core.radius.Request;
 import java.security.NoSuchAlgorithmException;
 
 public class SerializerTest {
@@ -29,8 +28,8 @@ public class SerializerTest {
             "7ffd1a0c0000372a07060005dc00";
         
      
-        Request test;
-        test = new Request();
+        Message test;
+        test = new Message();
         test.setSecretKey("RADIUStest");
         test.setCode(RADIUS.Code.ACCESS_REQUEST);
         test.setMID(193);

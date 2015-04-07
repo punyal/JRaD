@@ -50,7 +50,7 @@ public class JRaDclient {
         try {
             UDPSender sender = new UDPSender(message);
             sender.start();
-            UDPReceiver receiver = new UDPReceiver(sender.getSocket());
+            UDPReceiver receiver = new UDPReceiver(message);
             receiver.start();
         } catch (SocketException ex){
             System.err.println("Socket Exception: "+ex);

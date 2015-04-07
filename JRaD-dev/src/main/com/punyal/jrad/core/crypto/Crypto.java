@@ -30,7 +30,7 @@ public class Crypto {
      * @param decrypted
      * @return 
      */
-    public byte[] encrypt(byte[] secretKey, byte[] authenticator, byte[] decrypted) throws NoSuchAlgorithmException{
+    public byte[] encrypt(byte[] secretKey, byte[] authenticator, byte[] decrypted) {
         this.secretKey = secretKey;
         this.authenticator = authenticator;
         this.decrypted = decrypted;
@@ -45,7 +45,7 @@ public class Crypto {
      * @param decrypted
      * @return 
      */
-    public byte[] encrypt(String secretKey, byte[] authenticator, String decrypted) throws NoSuchAlgorithmException{
+    public byte[] encrypt(String secretKey, byte[] authenticator, String decrypted) {
         this.secretKey = Utils.stringToByteArray(secretKey);
         this.authenticator = authenticator;
         this.decrypted = Utils.stringToByteArray(decrypted);
@@ -56,7 +56,7 @@ public class Crypto {
     /**
      * Encryption method
      */
-    private void encryption() throws NoSuchAlgorithmException {
+    private void encryption() {
         // Check critical lengths
         if(authenticator.length != 16)
             throw new IllegalArgumentException("Authenticator with wrong length: "+authenticator.length);
@@ -69,27 +69,31 @@ public class Crypto {
         
         // Create crypted array
         crypted = new byte[tot_len];
-        
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] b_temp = new byte[secretKey.length+authenticator.length];
-        byte[] c_temp = new byte[16];
-        System.arraycopy(secretKey, 0, b_temp, 0, secretKey.length);
-        System.arraycopy(authenticator, 0, b_temp, secretKey.length, authenticator.length);
-        b_temp = md.digest(b_temp);
-        
-        while(len < tot_len) {
-            // Copy the 16th bytes to XOR
-            if((decrypted.length - len) < 16) {
-                System.arraycopy(decrypted, len, c_temp, 0, decrypted.length-len);
-                for(int i=decrypted.length-len; i<16; i ++) 
-                    c_temp[i] = 0;
-            } else System.arraycopy(decrypted, len, c_temp, 0, 16);
-            
-            for(int i=0; i<16; i++)
-                c_temp[i] = (byte)(0xFF & ((int)c_temp[i]) ^((int)b_temp[i]));
-            
-            System.arraycopy(c_temp, 0, crypted, len, 16);
-            len += 16;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] b_temp = new byte[secretKey.length+authenticator.length];
+            byte[] c_temp = new byte[16];
+            System.arraycopy(secretKey, 0, b_temp, 0, secretKey.length);
+            System.arraycopy(authenticator, 0, b_temp, secretKey.length, authenticator.length);
+            b_temp = md.digest(b_temp);
+
+            while(len < tot_len) {
+                // Copy the 16th bytes to XOR
+                if((decrypted.length - len) < 16) {
+                    System.arraycopy(decrypted, len, c_temp, 0, decrypted.length-len);
+                    for(int i=decrypted.length-len; i<16; i ++) 
+                        c_temp[i] = 0;
+                } else System.arraycopy(decrypted, len, c_temp, 0, 16);
+
+                for(int i=0; i<16; i++)
+                    c_temp[i] = (byte)(0xFF & ((int)c_temp[i]) ^((int)b_temp[i]));
+
+                System.arraycopy(c_temp, 0, crypted, len, 16);
+                len += 16;
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            System.err.println("No Such Algorithm Exception" + ex);
         }
+            
     }
 }

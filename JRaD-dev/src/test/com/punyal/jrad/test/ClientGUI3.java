@@ -8,9 +8,9 @@ package com.punyal.jrad.test;
 import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.UDPSender;
 import com.punyal.jrad.core.radius.AttributesMessage;
+import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
 import com.punyal.jrad.core.radius.RADIUS.Code;
-import com.punyal.jrad.core.radius.Request;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.InetAddress;
@@ -593,7 +593,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
         System.out.println("# "+fTable.getSelectedRow());
         
         System.out.println("# "+fTable.getModel().getValueAt(fTable.getSelectedRow(), 6));
-        Request treq = (Request)fTable.getModel().getValueAt(fTable.getSelectedRow(), 6);
+        Message treq = (Message)fTable.getModel().getValueAt(fTable.getSelectedRow(), 6);
         treq.print();
         
         resetAll();
@@ -717,7 +717,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
     private javax.swing.JTextField vendorID;
     private javax.swing.JTextField vendorType;
     private int seed;
-    private Request req;
+    private Message req;
     private UDPSender sender;
     // End of variables declaration          
     
@@ -782,7 +782,7 @@ public class ClientGUI3 extends javax.swing.JFrame {
         attTreeRoot.removeAllChildren();
         attTreeModel.reload();
         
-        req = new Request();
+        req = new Message();
         req.setSecretKey("RADIUStest");
         
         seed++;

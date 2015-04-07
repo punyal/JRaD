@@ -6,17 +6,21 @@
 package com.punyal.jrad.test;
 
 import com.punyal.jrad.JRaDclient;
+import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.radius.Message;
+import com.punyal.jrad.core.radius.RADIUS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import javax.swing.JFrame;
 
 
-public class ClientGUI4 extends JFrame {
+public class AuthenticationGUI extends JFrame {
     JRaDclient jRaDclient;
     
-    public ClientGUI4() {
-        super("jRaD Client tester");
+    public AuthenticationGUI() {
+        super("jRaD Authentication Client tester");
         jRaDclient = new JRaDclient();
         initComponents();
         startListeners();
@@ -187,11 +191,23 @@ public class ClientGUI4 extends JFrame {
     }
     
     private void buttonSendActionPerformed(ActionEvent evt) {
-        jRaDclient.setSecretKey(secretKey.getText());
-        Message message = jRaDclient.createNewMessage();
-        
-        System.out.println("SEND Message ID "+ message.getMIDString());
-        jRaDclient.sendMessage(message);
+        try {
+            jRaDclient.setSecretKey(secretKey.getText());
+            Message message = jRaDclient.createNewMessage();
+            message.setCode(RADIUS.Code.ACCESS_REQUEST);
+            message.setDestination(InetAddress.getByName(serverIP.getText()));
+            message.setDestinationPort(RADIUS.DEFAULT_RADIUS_PORT);
+            
+            message.newAttribute(RADIUS.Type.USER_NAME, Utils.stringToByteArray(userName.getText()));
+            message.newAttribute(RADIUS.Type.USER_PASSWORD, Utils.stringToByteArray(userPassword.getText()));
+            
+            //message.print();
+
+            jRaDclient.sendMessage(message);
+        } catch (UnknownHostException ex) {
+            System.err.println("Unknown Host Exception "+ex);
+        }
+            
     }
     
     private void secretKeyActionPerformed(ActionEvent evt) {
@@ -228,7 +244,7 @@ public class ClientGUI4 extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientGUI4().setVisible(true);
+                new AuthenticationGUI().setVisible(true);
             }
         });
     }
@@ -266,10 +282,7 @@ public class ClientGUI4 extends JFrame {
                 buttonSendActionPerformed(evt);
             }
         });
-        KeyListener keyListener = new KeyListener() {
-            
-        }
-        secreKeyL
+        
     }
     
 }

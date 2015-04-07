@@ -6,17 +6,16 @@
 
 package com.punyal.jrad.core.network;
 
+import com.punyal.jrad.core.radius.Message;
 import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
 
 public class UDPReceiver extends Thread {
-    DatagramSocket socket;
+    private Message message;
     private boolean stopped = false;
     
-    public UDPReceiver(DatagramSocket ds) throws SocketException {
-        this.socket = ds;
+    public UDPReceiver(Message message)  {
+        this.message =  message;
     }
     
     public void halt() {
@@ -31,9 +30,12 @@ public class UDPReceiver extends Thread {
                 return;
             DatagramPacket dp = new DatagramPacket(buffer, buffer.length);
             try {
-                socket.receive(dp);
-                String s = new String(dp.getData(), 0, dp.getLength());
-                System.out.println(s);
+                message.socket.receive(dp);
+                message.response = new Message();
+                message.response.setBytes(dp.getData());
+                message.response.parse();
+                message.print();
+                message.response.print();
                 Thread.yield();
             } catch(IOException ex) {
                 System.err.println(ex);

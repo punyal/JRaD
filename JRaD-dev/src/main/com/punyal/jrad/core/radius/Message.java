@@ -15,6 +15,7 @@ import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.USER_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.VENDOR_SPECIFIC;
 import com.punyal.jrad.elements.RawData;
+import java.awt.Component;
 import java.net.DatagramSocket;
 
 import java.net.InetAddress;
@@ -26,7 +27,8 @@ import java.util.Arrays;
 /**
  * The class Message models the base class of all RADIUS messages.
  */
-public class Message {
+public class Message extends Component {
+    
     
     /** The Constant NONE in case no MID has been set */
     public static final int NONE = -1;
@@ -51,6 +53,9 @@ public class Message {
     
     /** The 128-bit Authenticator (16 octets) */
     private byte[] authenticator;
+    
+    /** The response for request messages */
+    public Message response;
     
     /** The set of attributes of this message */
     ArrayList <AttributesMessage> Attributes = new ArrayList <> ();
@@ -263,7 +268,7 @@ public class Message {
         this.addAttribute(temp);    
     }
     
-    public void newAttribute(RADIUS.Type type, byte[] value) throws NoSuchAlgorithmException {
+    public void newAttribute(RADIUS.Type type, byte[] value)  {
         if(type.equals(CHAP_PASSWORD)||type.equals(VENDOR_SPECIFIC))
             throw new IllegalArgumentException("Illegal Attribute type " + type);
         AttributesMessage temp = new AttributesMessage(type);
