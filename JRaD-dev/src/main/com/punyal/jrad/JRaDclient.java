@@ -7,13 +7,24 @@ package com.punyal.jrad;
 
 import com.punyal.jrad.core.network.UDPReceiver;
 import com.punyal.jrad.core.network.UDPSender;
+import com.punyal.jrad.core.network.events.MessageListenerInt;
 import com.punyal.jrad.core.radius.Message;
 import java.net.SocketException;
 import java.security.SecureRandom;
+import java.util.EventObject;
 
 public class JRaDclient {
     private int seed;
     private String secretKey;
+    private MessageListenerInt newMessage = new MessageListenerInt() {
+
+        @Override
+        public void newIncomingMessage(EventObject evt) {
+            Message message = (Message) evt.getSource();
+            message.print();
+            message.response.print();
+        }
+    };
     
     /**
      * Empty Constructor
@@ -27,6 +38,9 @@ public class JRaDclient {
         this.secretKey = secretKey;
     }
     
+    public void addListener(MessageListenerInt listener) {
+        newMessage = listener;
+    }
     
     public Message createNewMessage() {
         Message message = new Message();
@@ -51,6 +65,7 @@ public class JRaDclient {
             UDPSender sender = new UDPSender(message);
             sender.start();
             UDPReceiver receiver = new UDPReceiver(message);
+            receiver.addListener(newMessage);
             receiver.start();
             
             //receiver.addActionListener(this);

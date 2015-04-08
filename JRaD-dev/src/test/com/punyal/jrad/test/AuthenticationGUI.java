@@ -7,13 +7,16 @@ package com.punyal.jrad.test;
 
 import com.punyal.jrad.JRaDclient;
 import com.punyal.jrad.core.Utils;
+import com.punyal.jrad.core.network.events.MessageListenerInt;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.EventObject;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class AuthenticationGUI extends JFrame {
@@ -24,6 +27,13 @@ public class AuthenticationGUI extends JFrame {
         jRaDclient = new JRaDclient();
         initComponents();
         startListeners();
+        jRaDclient.addListener(new MessageListenerInt() {
+
+            @Override
+            public void newIncomingMessage(EventObject evt) {
+                JOptionPane.showMessageDialog(rootPane, Utils.messagePrint(((Message)evt.getSource()).response));
+            }
+        });
     }
     
     /**

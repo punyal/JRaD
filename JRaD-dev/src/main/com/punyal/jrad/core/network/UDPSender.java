@@ -6,6 +6,7 @@
 
 package com.punyal.jrad.core.network;
 
+import com.punyal.jrad.core.network.events.*;
 import com.punyal.jrad.core.radius.Message;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -27,6 +28,8 @@ public class UDPSender extends Thread {
         this.stopped = true;
     }
     
+    
+    
     public DatagramSocket getSocket() {
         return this.message.socket;
     }
@@ -42,7 +45,6 @@ public class UDPSender extends Thread {
     @Override
     public void run() {
         try {
-            System.out.println(this.message.getBytes());
             DatagramPacket output = new DatagramPacket(this.message.getBytes(), this.message.getBytes().length, this.message.getDestination(), this.message.getDestinationPort());
             message.socket.send(output);
             Thread.yield();
