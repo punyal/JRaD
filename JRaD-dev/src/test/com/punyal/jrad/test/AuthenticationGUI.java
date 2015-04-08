@@ -204,23 +204,9 @@ public class AuthenticationGUI extends JFrame {
     }
     
     private void buttonSendActionPerformed(ActionEvent evt) {
-        try {
-            jRaDclient.setSecretKey(secretKey.getText());
-            Message message = jRaDclient.createNewMessage();
-            message.setCode(RADIUS.Code.ACCESS_REQUEST);
-            message.setDestination(InetAddress.getByName(serverIP.getText()));
-            message.setDestinationPort(RADIUS.DEFAULT_RADIUS_PORT);
-            
-            message.newAttribute(RADIUS.Type.USER_NAME, Utils.stringToByteArray(userName.getText()));
-            message.newAttribute(RADIUS.Type.USER_PASSWORD, Utils.stringToByteArray(userPassword.getText()));
-            
-            //message.print();
-
-            jRaDclient.sendMessage(message);
-        } catch (UnknownHostException ex) {
-            System.err.println("Unknown Host Exception "+ex);
-        }
-            
+        jRaDclient.setSecretKey(secretKey.getText());
+        jRaDclient.setServer(serverIP.getText(), RADIUS.DEFAULT_RADIUS_PORT);
+        jRaDclient.authenticate(userName.getText(), userPassword.getText());
     }
     
     private void secretKeyActionPerformed(ActionEvent evt) {

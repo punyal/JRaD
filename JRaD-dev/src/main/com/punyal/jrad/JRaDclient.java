@@ -5,17 +5,26 @@
  */
 package com.punyal.jrad;
 
+import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.UDPReceiver;
 import com.punyal.jrad.core.network.UDPSender;
 import com.punyal.jrad.core.network.events.MessageListenerInt;
 import com.punyal.jrad.core.radius.Message;
+import com.punyal.jrad.core.radius.RADIUS;
+import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.security.SecureRandom;
 import java.util.EventObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JRaDclient {
     private int seed;
     private String secretKey;
+    private InetAddress serverIP;
+    private int serverPort;
+    
     private MessageListenerInt newMessage = new MessageListenerInt() {
 
         @Override
@@ -34,15 +43,42 @@ public class JRaDclient {
         seed = random.nextInt();
     }
     
+    /**
+     * Set the Secret Key
+     * @param secretKey 
+     */
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
     
+    /**
+     * Set the Server Parameters
+     * @param ip
+     * @param port 
+     */
+    public void setServer(String ip, int port) {
+        try {
+            this.serverIP = InetAddress.getByName(ip);
+            this.serverPort = port;
+        } catch (UnknownHostException ex) {
+            System.err.println("Eception "+JRaDclient.class.getName());
+        }
+        
+    }
+    
+    /**
+     * Listener for incoming events
+     * @param listener 
+     */
     public void addListener(MessageListenerInt listener) {
         newMessage = listener;
     }
     
-    public Message createNewMessage() {
+    /** 
+     * Create a new Message with the correct ID and Authenticator
+     * @return 
+     */
+    private Message createNewMessage() {
         Message message = new Message();
         // Set SecretKey for encrypted attributes
         message.setSecretKey(this.secretKey);
@@ -60,26 +96,37 @@ public class JRaDclient {
         return message;
     }
     
-    public void sendMessage(Message message) {
+    /**
+     * Send a message
+     * @param message 
+     */
+    private void sendMessage(Message message) {
         try {
+            message.setDestination(serverIP);
+            message.setDestinationPort(serverPort);
             UDPSender sender = new UDPSender(message);
             sender.start();
             UDPReceiver receiver = new UDPReceiver(message);
             receiver.addListener(newMessage);
             receiver.start();
             
-            //receiver.addActionListener(this);
-            
-            // Handler thisHandler = new Handler(receiver)
-            //thisHandler.listenTo();
         } catch (SocketException ex){
             System.err.println("Socket Exception: "+ex);
         }
-            
     }
-
-
     
+    // Helper functions
     
-    
+    /**
+     * Helper to check the authentication of an user
+     * @param userName
+     * @param userPassword
+     */
+    public void authenticate(String userName, String userPassword) {
+        Message message = createNewMessage();
+        message.setCode(RADIUS.Code.ACCESS_REQUEST);
+        message.newAttribute(RADIUS.Type.USER_NAME, Utils.stringToByteArray(userName));
+        message.newAttribute(RADIUS.Type.USER_PASSWORD, Utils.stringToByteArray(userPassword));
+        sendMessage(message);
+    }
 }
