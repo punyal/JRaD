@@ -32,7 +32,7 @@ public class AuthenticationGUI extends JFrame {
             @Override
             public void newIncomingMessage(EventObject evt) {
                 if(((Message)evt.getSource()).response == null)
-                    JOptionPane.showMessageDialog(rootPane, "Connection Timeout!\nPosible causes:\n\t- No connection to server\n\t- No correct Secret Key", "Connection Problem", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Connection Timeout!\nPosible causes:\n\t- No connection to server\n\t- No correct Password", "Connection Problem", JOptionPane.ERROR_MESSAGE);
                 else
                     JOptionPane.showMessageDialog(rootPane, Utils.messagePrint(((Message)evt.getSource()).response));
             }
