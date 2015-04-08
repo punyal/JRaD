@@ -7,10 +7,8 @@ package com.punyal.jrad.test;
 
 import com.punyal.jrad.core.Utils;
 import com.punyal.jrad.core.network.UDPSender;
-import com.punyal.jrad.core.radius.AttributesMessage;
 import com.punyal.jrad.core.radius.Message;
 import com.punyal.jrad.core.radius.RADIUS;
-import com.punyal.jrad.core.radius.RADIUS.Code;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.InetAddress;
@@ -27,8 +25,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

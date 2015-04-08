@@ -121,6 +121,18 @@ public class RADIUS {
         FRAMED_APPLETALK_LINK      (37),
         FRAMED_APPLETALK_NETWORK   (38),
         FRAMED_APPLETALK_ZONE      (39),
+        ACCT_STATUS_TYPE           (40),
+        ACCT_DELAY_TIME            (41),
+        ACCT_INPUT_OCTETS          (42),
+        ACCT_OUTPUT_OCTETS         (43),
+        ACCT_SESSION_ID            (44),
+        ACCT_AUTHENTIC             (45),
+        ACCT_SESSION_TIME          (46),
+        ACCT_INPUT_PACKETS         (47),
+        ACCT_OUTPUT_PACKETS        (48),
+        ACCT_TERMINATE_CAUSE       (49),
+        ACCT_MULTI_SESSION_ID      (50),
+        ACCT_LINK_COUNT            (51),
         CHAP_CHALLENGE             (60),
         NAS_PORT_TYPE              (61),
         PORT_LIMIT                 (62),
@@ -172,6 +184,18 @@ public class RADIUS {
                 case 37:     return FRAMED_APPLETALK_LINK;
                 case 38:     return FRAMED_APPLETALK_NETWORK;
                 case 39:     return FRAMED_APPLETALK_ZONE;
+                case 40:     return ACCT_STATUS_TYPE;
+                case 41:     return ACCT_DELAY_TIME;
+                case 42:     return ACCT_INPUT_OCTETS;
+                case 43:     return ACCT_OUTPUT_OCTETS;
+                case 44:     return ACCT_SESSION_ID;
+                case 45:     return ACCT_AUTHENTIC;
+                case 46:     return ACCT_SESSION_TIME;
+                case 47:     return ACCT_INPUT_PACKETS;
+                case 48:     return ACCT_OUTPUT_PACKETS;
+                case 49:     return ACCT_TERMINATE_CAUSE;
+                case 50:     return ACCT_MULTI_SESSION_ID;
+                case 51:     return ACCT_LINK_COUNT;
                 case 60:     return CHAP_CHALLENGE;
                 case 61:     return NAS_PORT_TYPE;
                 case 62:     return PORT_LIMIT;

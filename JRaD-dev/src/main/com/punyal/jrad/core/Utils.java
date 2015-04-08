@@ -9,11 +9,8 @@ package com.punyal.jrad.core;
 import com.punyal.jrad.core.radius.*;
 import static com.punyal.jrad.core.radius.Attribute.Field.STRING;
 import static com.punyal.jrad.core.radius.RADIUS.UTF8_CHARSET;
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Utils {
     // Prevent initialization
@@ -112,87 +109,6 @@ public class Utils {
         info.append("==================================================\n");
         return info.toString();
     }
-    
-//    /**
-//     * Formats a Request into a readable String representation
-//     * @param m the Request
-//     * @return 
-//     */
-//    public static String messagePrint(Request m) {
-//        ArrayList<AttributesMessage> attributes = m.getAttributes();
-//        StringBuilder info = new StringBuilder();
-//        info.append("==[RADIUS Request]================================\n");
-//        info.append(String.format("Code: %s\n", m.getCode()));
-//        info.append(String.format("MID: %s\n", m.getMIDString()));
-//        info.append(String.format("Length: %d\n", m.getLength()));
-//        info.append(String.format("Authenticator: %s\n", toHexString(m.getAuthenticator())));
-//        if(attributes.size() > 0){
-//            info.append(String.format("--------------- Attributes [%d] ----------------\n", attributes.size()));
-//            attributes.stream().forEach((attribute) -> {
-//                switch(attribute.getType()) {
-//                    case VENDOR_SPECIFIC:
-//                        info.append(String.format("%-2d %-18s (%d) %-2d %s\n",
-//                                attribute.getTypeValue(),
-//                                attribute.getType(),
-//                                attribute.getVendorID(),
-//                                attribute.getVendorType(),
-//                                Utils.toHexString(attribute.getVendorValue())));
-//                        break;
-//                    case CHAP_PASSWORD:
-//                        //TODO:implement this
-//                        break;
-//                    default:
-//                        if(attribute.getFieldType().equals(STRING))
-//                            info.append(String.format("%-2d %-25s %s\n", attribute.getTypeValue(), attribute.getType(), attribute.getValueString()));
-//                        else
-//                            info.append(String.format("%-2d %-25s %s\n", attribute.getTypeValue(), attribute.getType(), Utils.toHexString(attribute.getValue())));
-//                        break;
-//                }
-//            });
-//        }
-//        info.append("==================================================\n");
-//        return info.toString();
-//    }
-//    
-//    /**
-//     * Formats a Response into a readable String representation
-//     * @param m the Request
-//     * @return 
-//     */
-//    public static String messagePrint(Response m) {
-//        ArrayList<AttributesMessage> attributes = m.getAttributes();
-//        StringBuilder info = new StringBuilder();
-//        info.append("==[RADIUS Response]===============================\n");
-//        info.append(String.format("Code: %s\n", m.getCode()));
-//        info.append(String.format("MID: %s\n", m.getMIDString()));
-//        info.append(String.format("Length: %d\n", m.getLength()));
-//        info.append(String.format("Authenticator: %s\n", toHexString(m.getAuthenticator())));
-//        if(attributes.size() > 0){
-//            info.append(String.format("--------------- Attributes [%d] ----------------\n", attributes.size()));
-//            attributes.stream().forEach((attribute) -> {
-//                switch(attribute.getType()) {
-//                    case VENDOR_SPECIFIC:
-//                        info.append(String.format("%-2d %-18s (%d) %-2d %s\n",
-//                                attribute.getTypeValue(),
-//                                attribute.getType(),
-//                                attribute.getVendorID(),
-//                                attribute.getVendorType(),
-//                                Utils.toHexString(attribute.getVendorValue())));
-//                        break;
-//                    case CHAP_PASSWORD:
-//                        break;
-//                    default:
-//                        if(attribute.getFieldType().equals(STRING))
-//                            info.append(String.format("%-2d %-25s %s\n", attribute.getTypeValue(), attribute.getType(), attribute.getValueString()));
-//                        else
-//                            info.append(String.format("%-2d %-25s %s\n", attribute.getTypeValue(), attribute.getType(), Utils.toHexString(attribute.getValue())));
-//                        break;
-//                }
-//            });
-//        }
-//        info.append("==================================================\n");
-//        return info.toString();
-//    }
     
     public static String printAttributesDB() {
         StringBuilder info = new StringBuilder();
