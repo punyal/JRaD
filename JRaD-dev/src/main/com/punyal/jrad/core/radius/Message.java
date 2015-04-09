@@ -19,7 +19,6 @@ import java.awt.Component;
 import java.net.DatagramSocket;
 
 import java.net.InetAddress;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -92,7 +91,6 @@ public class Message extends Component {
     
     /**
      * Instances a new message with no specified message code.
-     * @param secretKey
      */
     public Message() {
     }
@@ -441,7 +439,6 @@ public class Message extends Component {
     * Sets the timestamp.
     * Not part of the fluent API.
     *
-    * @param timestamp the new timestamp
     */
     public void setTimestamp() {
         java.util.Date date= new java.util.Date();

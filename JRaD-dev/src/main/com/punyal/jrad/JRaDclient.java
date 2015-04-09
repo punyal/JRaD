@@ -16,8 +16,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.security.SecureRandom;
 import java.util.EventObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class JRaDclient {
     private int seed;
@@ -45,7 +43,7 @@ public class JRaDclient {
     
     /**
      * Set the Secret Key
-     * @param secretKey 
+     * @param secretKey information
      */
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
@@ -53,8 +51,8 @@ public class JRaDclient {
     
     /**
      * Set the Server Parameters
-     * @param ip
-     * @param port 
+     * @param ip of the server
+     * @param port of the server
      */
     public void setServer(String ip, int port) {
         try {
@@ -68,7 +66,7 @@ public class JRaDclient {
     
     /**
      * Listener for incoming events
-     * @param listener 
+     * @param listener for incoming events
      */
     public void addListener(MessageListenerInt listener) {
         newMessage = listener;

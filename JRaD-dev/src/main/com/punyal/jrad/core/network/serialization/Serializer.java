@@ -14,7 +14,7 @@ public class Serializer {
     /**
      * Serializes the specified request.
      * 
-     * @param request the request
+     * @param message
      * @return the request as raw data
      */
     

@@ -18,8 +18,8 @@ public class UDPSender extends Thread {
     
     /**
      * Set message parameters
-     * @param message
-     * @throws SocketException 
+     * @param message to send
+     * @throws SocketException  when is not possible to send
      */
     public UDPSender(Message message) throws SocketException {
         this.message = message;
@@ -37,7 +37,7 @@ public class UDPSender extends Thread {
        
     /**
      * Get socket connection
-     * @return 
+     * @return socket information
      */
     public DatagramSocket getSocket() {
         return this.message.socket;

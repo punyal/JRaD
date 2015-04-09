@@ -22,7 +22,7 @@ public class UDPReceiver extends Thread {
     
     /**
      * Constructor to set all parameters for the connection
-     * @param message 
+     * @param message with the socket to configure the incoming connection.
      */
     public UDPReceiver(Message message)  {
         this.message =  message;
@@ -30,7 +30,7 @@ public class UDPReceiver extends Thread {
     
     /**
      * Add a event listener for incoming messages
-     * @param listener 
+     * @param listener for incoming events
      */
     public void addListener(MessageListenerInt listener) {
         mlistener.addMessageListener(listener);
