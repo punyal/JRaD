@@ -9,7 +9,7 @@ public class MessageListener {
     public void addMessageListener(MessageListenerInt listener) {
         listenerList.add(MessageListenerInt.class, listener);
     }
-    public void removeMessageListenet(MessageListenerInt listener) {
+    public void removeMessageListener(MessageListenerInt listener) {
         listenerList.remove(MessageListenerInt.class, listener);
     }
    public void newIncommingMessage(EventObject evt) {

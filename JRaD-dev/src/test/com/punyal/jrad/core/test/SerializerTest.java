@@ -44,6 +44,7 @@ public class SerializerTest {
         test.parse();
         test.print();
         
+        /*
         Message test2;
         test2 = new Message();
         test2.setSecretKey("RADIUStest");
@@ -59,7 +60,9 @@ public class SerializerTest {
         System.out.println("Serialization: "+Utils.toHexString(test2.getBytes()));
         test2.parse();
         test2.print();
+        */
         
+        System.out.println(test.getAttributeByType(USER_NAME).getValueString());
         
         System.out.println("# Test (STOP)");
     }

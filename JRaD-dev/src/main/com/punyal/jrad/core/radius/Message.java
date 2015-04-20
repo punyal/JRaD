@@ -11,6 +11,7 @@ import com.punyal.jrad.core.crypto.Crypto;
 import com.punyal.jrad.core.network.serialization.DataParser;
 import com.punyal.jrad.core.network.serialization.Serializer;
 import static com.punyal.jrad.core.radius.RADIUS.MessageFormat.AUTHENTICATOR_BITS;
+import com.punyal.jrad.core.radius.RADIUS.Type;
 import static com.punyal.jrad.core.radius.RADIUS.Type.CHAP_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.USER_PASSWORD;
 import static com.punyal.jrad.core.radius.RADIUS.Type.VENDOR_SPECIFIC;
@@ -305,6 +306,15 @@ public class Message extends Component {
      
     public ArrayList<AttributesMessage> getAttributes() {return this.Attributes;}
     public AttributesMessage getAttributes(int index) {return this.Attributes.get(index);}
+    
+    public AttributesMessage getAttributeByType(Type type) {
+        int i = 0;
+        while(i < Attributes.size()) {
+            if(Attributes.get(i).getType().equals(type))
+                return Attributes.get(i);
+        }
+        return null;
+    }
     
     public void recalculateLength() {
         this.length = MINIMAL;

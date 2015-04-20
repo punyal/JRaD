@@ -23,7 +23,7 @@ public class JRaDclient {
     private InetAddress serverIP;
     private int serverPort;
     
-    private MessageListenerInt newMessage = new MessageListenerInt() {
+    private MessageListenerInt newMessage=  new MessageListenerInt() {
 
         @Override
         public void newIncomingMessage(EventObject evt) {
