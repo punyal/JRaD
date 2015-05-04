@@ -308,10 +308,12 @@ public class Message extends Component {
     public AttributesMessage getAttributes(int index) {return this.Attributes.get(index);}
     
     public AttributesMessage getAttributeByType(Type type) {
-        int i = 0;
-        while(i < Attributes.size()) {
-            if(Attributes.get(i).getType().equals(type))
+        for(int i = 0; i < Attributes.size(); i++) {
+            System.out.println(Attributes.get(i).getType());
+            if(Attributes.get(i).getType().equals(type)){
                 return Attributes.get(i);
+            }
+                
         }
         return null;
     }

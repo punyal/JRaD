@@ -38,6 +38,7 @@ public class SerializerTest {
         test.newAttribute(USER_PASSWORD, Utils.hexStringToByteArray("bb47ce774c5cb030b7b167ead6851cd7cdf3db8fd4ab1955d1a4c9ad8022947c"));
         test.newAttribute(CALLED_STATION_ID, Utils.stringToByteArray("BB-BB-BB-BB-BB-BB"));
         test.newAttribute(CALLING_STATION_ID, Utils.stringToByteArray("AA-AA-AA-AA-AA-AA"));
+        test.newAttribute(FILTER_ID, Utils.stringToByteArray("human"));
         test.print();
         test.serialize();
         System.out.println("Serialization: "+Utils.toHexString(test.getBytes()));
@@ -62,7 +63,7 @@ public class SerializerTest {
         test2.print();
         */
         
-        System.out.println(test.getAttributeByType(USER_NAME).getValueString());
+        System.out.println(test.getAttributeByType(FILTER_ID).getValueString());
         
         System.out.println("# Test (STOP)");
     }
